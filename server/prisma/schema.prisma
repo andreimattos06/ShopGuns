@@ -1,0 +1,34 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Cadastro {
+  cpf          String @unique
+  email        String @unique
+  password     String
+  nomeCompleto String
+  logradouro   String
+  endereco     String
+  numero       String
+  bairro       String
+  cidade       String
+  estado       String
+  contato      String
+
+  anuncios Anuncio[]
+}
+
+model Anuncio {
+  id          String   @id @default(uuid())
+  cadastro    Cadastro @relation(fields: [cadastroCpf], references: [cpf])
+  cadastroId  String
+  cadastroCpf String
+}
