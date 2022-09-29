@@ -1,5 +1,5 @@
 import * as Dialog from '@radix-ui/react-dialog'
-import { SignIn, Target, UserPlus } from 'phosphor-react'
+import { SignIn, Target, UserPlus, House, User, Table } from 'phosphor-react'
 import { InputHTMLAttributes } from 'react'
 import { Link } from 'react-router-dom'
 import { Input } from './Input'
@@ -16,16 +16,26 @@ export function Header(){
                 <div className='pr-8 py-4 text-2xl flex flex-justify text-zinc-200 gap-6 '>
 
                     <Link to='/'>
-                        <button className='hover:bg-zinc-700 p-2 hover:rounded-md'>Página Inicial</button>
+                        
+                        <button className='hover:bg-zinc-700 p-2 hover:rounded-md flex'>
+                            <House size={32} className='text-red-800 pr-1.5'/>
+                            Página Inicial
+                        </button>
                     </Link>
                     <text className='pt-1.5 text-red-800'>|</text>   
-                    <button className='hover:bg-zinc-700 p-2 hover:rounded-md'>Anúncios</button> 
+
+                    <button className='hover:bg-zinc-700 p-2 hover:rounded-md flex'>
+                        <Table size={32} className='text-red-800 pr-1.5'/>
+                        Anúncios
+                    </button> 
+
                     <text className='pt-1.5 text-red-800'>|</text>           
 
                     <Dialog.Root>
                     <Dialog.Trigger>
 
-                        <button className='hover:text-red-800 bg-zinc-700 p-2 rounded-md'>
+                        <button className='hover:text-red-800 bg-zinc-700 p-2 rounded-md flex'>
+                            <User size={32} className='text-red-800 pr-1.5'/>
                             Login
                         </button>                 
                                 
@@ -35,7 +45,8 @@ export function Header(){
 
                         <Dialog.Content className='fixed bg-zinc-800 px-16 pb-12 pt-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-lg shadow-black/25 w-2/6 rounded-md'>
                             <Dialog.Title> 
-                            <text className='text-zinc-200 font-bold text-3xl'>Realizar Login </text>                      
+                            <text className='text-zinc-200 font-bold text-3xl'>
+                                Realizar Login </text>                      
 
                             </Dialog.Title>                   
 

@@ -6,9 +6,14 @@ import { PrismaClient } from '@prisma/client'
 const app = express()
 
 app.use(express.json())
+
+
 app.use(cors({
-    origin: 'http://localhost:3334'
-})) //Serve para validar os domínios de acesso ao back
+    
+    "origin": "*",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+
+}))
 
 const prisma = new PrismaClient({
     log: ['query']
@@ -34,9 +39,11 @@ app.post('/cadastro', async (request, response) => {
             contato: body.contato,
 
         }
+
+        
     })
 
-    return response.status(201).json(cad);
+    return response.status(201);
 })
 
 app.get('/anuncios', (request, response) => {

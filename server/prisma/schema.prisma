@@ -31,4 +31,22 @@ model Anuncio {
   cadastro    Cadastro @relation(fields: [cadastroCpf], references: [cpf])
   cadastroId  String
   cadastroCpf String
+
+  tipo     String
+  calibre  String
+  marca    String
+  modelo   String
+  fotos    String
+  qntFotos Int
+  valor    String
+
+  descricao       String
+  cidade          String
+  estado          String
+  cep             String
+  sistemaRegistro String
+  envio           Boolean
+
+  visualizacoesAnuncio Int
+  prioridade           Int
 }
