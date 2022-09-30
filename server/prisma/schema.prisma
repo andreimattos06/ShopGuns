@@ -49,4 +49,5 @@ model Anuncio {
 
   visualizacoesAnuncio Int
   prioridade           Int
+  dataCriacao          DateTime
 }

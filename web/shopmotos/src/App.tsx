@@ -11,6 +11,7 @@ import { Header } from './components/forms/header';
 
 import Home from './pages/home';
 import Cadastro from './pages/cadastro';
+import Novoanuncio from './pages/novoanuncio';
 
 function App() {
   return(
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/cadastro' element={<Cadastro />} />
+          <Route path='/novoanuncio' element={<Novoanuncio />} />
         </Routes>
 
       </BrowserRouter>
