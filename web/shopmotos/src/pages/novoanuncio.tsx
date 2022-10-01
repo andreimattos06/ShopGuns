@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FormEvent } from 'react';
 import axios from 'axios'; 
 import { CheckSquare } from "phosphor-react";
@@ -7,6 +7,12 @@ import { Form } from 'react-bootstrap';
 
 import { Header } from "../components/forms/header";
 import { Input } from "../components/forms/Input";
+
+
+
+interface Marca {
+    nome: Undefined;
+  }
 
 
 async function handleCreateAnuncio(event: FormEvent){
@@ -18,14 +24,31 @@ async function handleCreateAnuncio(event: FormEvent){
 
     
     console.log(data.tipo)
-    console.log(data.calibre)
-
-    
+    console.log(data.calibre) 
+    console.log(data.marca)   
     
 }
 
-export default () => (
-    <div className='flex flex-col'>
+
+
+
+export default () => {
+
+    const [marcas, setMarcas] = useState<Marca[]>([]);
+    
+      useEffect(() => {                      //DESTA FORMA O USEEFFECT
+          fetch('http://localhost:3334/marcasarmas') //EXECUTA APENAS 1 X
+          .then(response => response.json())
+          .then(data => {
+            setMarcas(data)
+          })  
+        }, [])
+    
+
+    return(
+
+        
+        <div className='flex flex-col'>
     
         <Header />
 
@@ -88,17 +111,25 @@ export default () => (
                                 <option value="32 S&W LONG">.32 S&W LONG</option>
                                 <option value="38 SUPER AUTO">.38 SUPER AUTO</option>
                                 <option value="223 REMINGTON">.223 REMINGTON</option>
-                                <option value="30">.30</option>
+                                <option value="30">.30</option>                              
 
-                                
-
-                                
-                            </Form.Select>
+                           </Form.Select>
                         </div>
 
                         <div className='flex flex-col pr-5 pb-5'>
-                            <label htmlFor='password' className='font-bold pb-2'>Senha:</label>
-                            <Input name='password' id='password' placeholder='********'></Input>
+                            <label htmlFor='marca' className='font-bold pb-2'>Marca:</label>
+                            <Form.Select name="marca" aria-label="Selecione a marca" className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 focus:outline-none">  
+                                {marcas.map(marca => {
+                                    return(
+                                        <option value={marca.nome}>
+                                            {marca.nome}
+                                        </option>
+  
+                                    )
+
+                                })}
+                         
+                            </Form.Select>
                         </div>
 
                         <div className='flex flex-col'>
@@ -160,4 +191,9 @@ export default () => (
    
 
     </div>
-)
+
+
+    );
+}
+
+    

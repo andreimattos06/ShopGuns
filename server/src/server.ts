@@ -47,8 +47,17 @@ app.post('/cadastro', async (request, response) => {
 })
 
 app.get('/anuncios', (request, response) => {
+    return (''
+        
+    )
+})
+
+app.get('/marcasarmas', async(request, response) => {
+    const marcas = await prisma.marcasArma.findMany({
+        
+    })
     return (
-        console.log('aa')
+        response.json(marcas)
     )
 })
 

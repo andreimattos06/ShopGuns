@@ -51,3 +51,7 @@ model Anuncio {
   prioridade           Int
   dataCriacao          DateTime
 }
+
+model marcasArma {
+  nome String @id @unique
+}
