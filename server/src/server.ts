@@ -52,13 +52,44 @@ app.get('/anuncios', (request, response) => {
     )
 })
 
-app.get('/marcasarmas', async(request, response) => {
-    const marcas = await prisma.marcasArma.findMany({
+
+/* --------------------COMECO Get's para formulario de Novo Anuncio -------------------------------*/
+app.get('/infosnovoanuncio', async(request, response) => {
+    const marcas = await prisma.marcasArma.findMany({        
+    })
+
+    const tipos = await prisma.tipoArma.findMany({        
+    })
+
+    const calibres = await prisma.calibre.findMany({        
+    })
+
+    const infos = [marcas, tipos, calibres]
+
+    
+    return (
+        response.json(infos)
+    )
+})
+
+app.get('/tiposarmas', async(request, response) => {
+    const tipos = await prisma.tipoArma.findMany({
         
     })
     return (
-        response.json(marcas)
+        response.json(tipos)
     )
 })
+
+app.get('/calibresarmas', async(request, response) => {
+    const calibre = await prisma.calibre.findMany({
+        
+    })
+    return (
+        response.json(calibre)
+    )
+})
+/* --------------------FIM Get's para formulario de Novo Anuncio -------------------------------*/
+
 
 app.listen(3334)

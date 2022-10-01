@@ -7,13 +7,25 @@ import { Form } from 'react-bootstrap';
 
 import { Header } from "../components/forms/header";
 import { Input } from "../components/forms/Input";
+import { copiarArray } from "../components/utils/copiarArray";
 
 
 
-interface Marca {
-    nome: Undefined;
-  }
+interface Infos {
+    objeto: any;
+}
 
+interface Marca{
+    nome: any;
+}  
+
+interface Calibre {
+    nome: any;
+}  
+
+interface TipoArma {
+    objeto: any[];
+}
 
 async function handleCreateAnuncio(event: FormEvent){
 
@@ -34,16 +46,32 @@ async function handleCreateAnuncio(event: FormEvent){
 
 export default () => {
 
-    const [marcas, setMarcas] = useState<Marca[]>([]);
     
-      useEffect(() => {                      //DESTA FORMA O USEEFFECT
-          fetch('http://localhost:3334/marcasarmas') //EXECUTA APENAS 1 X
-          .then(response => response.json())
-          .then(data => {
-            setMarcas(data)
-          })  
-        }, [])
+/*----------------------------INICIO Pegar Opções para os Selects do BD ----------------------------------------*/
+    const [infos, setInfos] = useState<Infos[]>([]);
+  
     
+    useEffect(() => {                      //DESTA FORMA O USEEFFECT
+        fetch('http://localhost:3334/infosnovoanuncio') //EXECUTA APENAS 1 X
+        .then(response => response.json())
+        .then(data => {                                                           //PEGA NO BD AS OPCOES PARA PREENCHER OS SELECTS
+            setInfos(data)   
+            
+        })  
+
+        
+    }, [])
+
+    const marcas = [''];                                                        //VARIAVEIS PARA OS SELECTS
+    const tipos = [''];
+    const calibres = [''];
+
+
+    copiarArray(infos.slice(0,1), marcas)                                       //FUNCAO CRIADA PARA ALOCAR AS INFORMACOES RECEBIDAS DO BD
+    copiarArray(infos.slice(1,2), tipos)
+    copiarArray(infos.slice(2,3), calibres)
+ /*----------------------------FIM Pegar Opções para os Selects do BD ----------------------------------------*/       
+
 
     return(
 
@@ -64,13 +92,13 @@ export default () => {
                             <label htmlFor='tipo' className='font-bold pb-2'>Tipo do Armamento:</label>
                             <Form.Select name="tipo" aria-label="Selecione o tipo do armamento" className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 focus:outline-none">  
                                 <option disabled={true} >Selecione:</option>
-                                <option value="carabina">Carabina</option>
-                                <option value="espingarda">Espingarda</option>
-                                <option value="fuzil">Fuzil</option>
-                                <option value="pistola">Pistola</option>
-                                <option value="revolver">Revolver</option>
-                                <option value="rifle">Rifle</option>
-                                <option value="submetralhadora">Submetralhadora</option>
+                                {tipos.map(tipo => {
+                                    return(
+                                        <option value={tipo}>
+                                            {tipo}
+                                        </option>
+                                    )
+                                })}
                                 
                             </Form.Select>
                         </div>
@@ -78,40 +106,13 @@ export default () => {
                         <div className='flex flex-col'>
                             <label htmlFor='calibre' className='font-bold pb-2'>Calibre:</label>
                             <Form.Select name="calibre" aria-label="Selecione o calibre" className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 focus:outline-none">  
-                                <option disabled={true} >Selecione:</option>
-                                <option value="38">.38</option>
-                                <option value="380">.380</option>
-                                <option value="308">.308</option>
-                                <option value="32">.32</option>
-                                <option value="5,56x45MM">5,56x45MM</option>
-                                <option value="223">.223</option>
-                                <option value="7,62X39MM">7,62X39MM</option>
-                                <option value="25">.25</option>
-                                <option value="22 LR">.22 LR</option>
-                                <option value="380 AUTO">.380 AUTO</option>
-                                <option value="9MM">9MM</option>
-                                <option value="308 WINCHESTER">.308 WINCHESTER</option>
-                                <option value="38 SPL">.38 SPL</option>
-                                <option value="357 MAGNUM">.357 MAGNUM</option>
-                                <option value="12">.12</option>
-                                <option value="40">.40</option>
-                                <option value="44 MAGNUM">.44 MAGNUM</option>
-                                <option value="45 AUTO">.45 AUTO</option>
-                                <option value="454 CASULL">.454 CASULL</option>
-                                <option value="7,62X51MM">.7,62X51MM</option>
-                                <option value="44-40 WIN">.44-40 WIN</option>
-                                <option value="44 S&W SPL">.44 S&W SPL</option>
-                                <option value="45 GAP">.45 GAP</option>
-                                <option value="16">.16</option>
-                                <option value="20">.20</option>
-                                <option value="9MM LUGER">9MM LUGER</option>
-                                <option value="24">.24</option>
-                                <option value="36">.36</option>
-                                <option value="40 S&W">.40 S&W</option>
-                                <option value="32 S&W LONG">.32 S&W LONG</option>
-                                <option value="38 SUPER AUTO">.38 SUPER AUTO</option>
-                                <option value="223 REMINGTON">.223 REMINGTON</option>
-                                <option value="30">.30</option>                              
+                                {calibres.map(calibre => {
+                                    return(
+                                        <option value={calibre}>
+                                            {calibre}
+                                        </option>
+                                    )
+                                })}                    
 
                            </Form.Select>
                         </div>
@@ -121,8 +122,8 @@ export default () => {
                             <Form.Select name="marca" aria-label="Selecione a marca" className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 focus:outline-none">  
                                 {marcas.map(marca => {
                                     return(
-                                        <option value={marca.nome}>
-                                            {marca.nome}
+                                        <option value={marca}>
+                                            {marca}
                                         </option>
   
                                     )

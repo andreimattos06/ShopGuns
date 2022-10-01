@@ -52,6 +52,14 @@ model Anuncio {
   dataCriacao          DateTime
 }
 
-model marcasArma {
+model MarcasArma {
+  nome String @id @unique
+}
+
+model Calibre {
+  nome String @id @unique
+}
+
+model TipoArma {
   nome String @id @unique
 }
