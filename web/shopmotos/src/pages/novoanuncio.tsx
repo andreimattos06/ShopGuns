@@ -4,12 +4,15 @@ import axios from 'axios';
 import { CheckSquare } from "phosphor-react";
 
 import { Form } from 'react-bootstrap';
+import InputMask from "react";
 
 import * as RadioGroup from '@radix-ui/react-radio-group';
 
 import { Header } from "../components/forms/header";
 import { Input } from "../components/forms/Input";
+import { DesenharLinha } from "../components/utils/desenharLinha";
 import { copiarArray } from "../components/utils/copiarArray";
+import ReactInputMask from "react-input-mask";
 
 
 
@@ -148,7 +151,7 @@ export default () => {
 
                             <div className="flex pt-3 pb-5">
 
-                                <RadioGroup.Root name ="sistemaRegistro" className="text-zinc-200 text-xl flex flex-row">
+                                <RadioGroup.Root name ="sistemaRegistro" className="text-zinc-200 text-lg flex flex-row">
 
                                     <div className="gap-3 flex flex-row pr-8">
 
@@ -197,6 +200,24 @@ export default () => {
                             
                         </div>
                         
+                        <div className='flex flex-col pr-5 pb-5'>
+                            <label htmlFor='valor' className='font-bold pb-2'>Valor:</label>
+                            <div>
+                                <span className='rounded-l border-t-2 border-b-2 border-l-2 border-r-[1px] border-red-900 bg-zinc-900 py-3 px-4 text-sm placeholder:text-zinc-500 focus:outline-none'>R$</span>
+                                <ReactInputMask  mask="99999,99" className='border-t-2 border-b-2 border-r-2 border-red-900 rounded-r bg-zinc-900 py-3 px-4 text-sm placeholder:text-zinc-500 focus:outline-none' name='valor' id='valor' placeholder='1,00'>
+                                </ReactInputMask>
+                            </div>
+                            
+                        </div>
+
+                        <div></div>                     {/* Div Vazio apenas para ajuste de interface*/}
+
+
+                        <div className="col-span-2 pt-5 pb-10">
+                                <DesenharLinha cor="rgb(127,29,29)" tamanho="2px">
+                                </DesenharLinha>
+                        </div>                                  
+
 
                         <div className='flex flex-col pr-5 pb-5'>
                             <label htmlFor='logradouro' className='font-bold pb-2'>Logradouro:</label>
