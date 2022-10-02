@@ -5,6 +5,8 @@ import { CheckSquare } from "phosphor-react";
 
 import { Form } from 'react-bootstrap';
 
+import * as RadioGroup from '@radix-ui/react-radio-group';
+
 import { Header } from "../components/forms/header";
 import { Input } from "../components/forms/Input";
 import { copiarArray } from "../components/utils/copiarArray";
@@ -37,7 +39,8 @@ async function handleCreateAnuncio(event: FormEvent){
     
     console.log(data.tipo)
     console.log(data.calibre) 
-    console.log(data.marca)   
+    console.log(data.marca)  
+    console.log(data.sistemaRegistro)    
     
 }
 
@@ -88,7 +91,7 @@ export default () => {
                 
                 <form onSubmit={handleCreateAnuncio} className="">
                     <div className="grid grid-cols-2 mt-14 text-zinc-200 text-xl">
-                        <div className="flex flex-col pr-5 pb-5">
+                        <div className="flex flex-col pr-5 pb-5">              {/*Input para o Tipo de Armamento*/}
                             <label htmlFor='tipo' className='font-bold pb-2'>Tipo do Armamento:</label>
                             <Form.Select name="tipo" aria-label="Selecione o tipo do armamento" className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 focus:outline-none">  
                                 <option disabled={true} >Selecione:</option>
@@ -103,9 +106,10 @@ export default () => {
                             </Form.Select>
                         </div>
 
-                        <div className='flex flex-col'>
+                        <div className='flex flex-col'>                        {/*Input para o Calibre*/}
                             <label htmlFor='calibre' className='font-bold pb-2'>Calibre:</label>
                             <Form.Select name="calibre" aria-label="Selecione o calibre" className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 focus:outline-none">  
+                                <option disabled={true} >Selecione:</option>
                                 {calibres.map(calibre => {
                                     return(
                                         <option value={calibre}>
@@ -117,9 +121,10 @@ export default () => {
                            </Form.Select>
                         </div>
 
-                        <div className='flex flex-col pr-5 pb-5'>
+                        <div className='flex flex-col pr-5 pb-5'>             {/*Input para a Marca*/}
                             <label htmlFor='marca' className='font-bold pb-2'>Marca:</label>
                             <Form.Select name="marca" aria-label="Selecione a marca" className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 focus:outline-none">  
+                                <option disabled={true} >Selecione:</option>
                                 {marcas.map(marca => {
                                     return(
                                         <option value={marca}>
@@ -134,9 +139,64 @@ export default () => {
                         </div>
 
                         <div className='flex flex-col'>
-                            <label htmlFor='cpf' className='font-bold pb-2'>CPF:</label>
-                            <Input name='cpf' id='cpf' placeholder='111.222.333-44'></Input>
+                            <label htmlFor='modelo' className='font-bold pb-2'>Modelo:</label>
+                            <Input name='modelo' id='modelo' placeholder='111.222.333-44'></Input>
                         </div>
+
+                        <div className="flex flex-col col-span-2">              {/*Radio Group do Sistema de Registro*/}
+                            <label htmlFor='modelo' className='font-bold pb-2'>Sistema de Registro:</label>
+
+                            <div className="flex pt-3 pb-5">
+
+                                <RadioGroup.Root name ="sistemaRegistro" className="text-zinc-200 text-xl flex flex-row">
+
+                                    <div className="gap-3 flex flex-row pr-8">
+
+                                        <RadioGroup.Item value="sigma" className="bg-zinc-900 rounded-full w-9 h-9 hover:border-2 hover:border-red-900 
+                                                                        focus:border-2 focus:border-red-900">
+
+                                            <RadioGroup.Indicator className="flex justify-center items-center w-full h-full relative
+                                                                        after:bg-red-900 after:h-4 after:w-4 after:rounded-full after:block"/>
+
+                                        </RadioGroup.Item>
+                                        <label htmlFor='sigma' className='font-bold items-center'>SIGMA</label>
+
+                                    </div>
+
+                                    <div className="gap-3 flex pr-8">
+
+                                        <RadioGroup.Item value="sinarm" className="bg-zinc-900 rounded-full w-9 h-9 hover:border-2 hover:border-red-900 
+                                                                        focus:border-2 focus:border-red-900">
+
+                                            <RadioGroup.Indicator className="flex justify-center items-center w-full h-full relative
+                                                                        after:bg-red-900 after:h-4 after:w-4 after:rounded-full after:block"/>
+
+                                        </RadioGroup.Item>
+                                        <label htmlFor='sinarm' className='font-bold items-center'>SINARM</label>
+
+                                    </div>
+
+                                    <div className="gap-3 flex">
+
+                                        <RadioGroup.Item value="outro" className="bg-zinc-900 rounded-full w-9 h-9 hover:border-2 hover:border-red-900 
+                                                                        focus:border-2 focus:border-red-900">
+
+                                            <RadioGroup.Indicator className="flex justify-center items-center w-full h-full relative
+                                                                        after:bg-red-900 after:h-4 after:w-4 after:rounded-full after:block"/>
+
+                                        </RadioGroup.Item>
+                                        <label htmlFor='outro' className='font-bold items-center'>Outro</label>
+
+                                    </div>
+
+                                    
+
+                                </RadioGroup.Root>
+
+                            </div>
+                            
+                        </div>
+                        
 
                         <div className='flex flex-col pr-5 pb-5'>
                             <label htmlFor='logradouro' className='font-bold pb-2'>Logradouro:</label>
@@ -168,9 +228,9 @@ export default () => {
                             <Input name='estado' id='estado' placeholder='Goiás'></Input>
                         </div>
 
-                        <div className='flex flex-col pr-5 pb-16'>
-                            <label htmlFor='contato' className='font-bold pb-2'>Contato:</label>
-                            <Input name='contato' id='contato' placeholder='(64) 99999-8888'></Input>
+                        <div className='flex flex-col col-span-2 pb-16 min-h-[300px]'>
+                            <label htmlFor='descricao' className='font-bold pb-2'>Descrição Adicional:</label>
+                            <textarea className='bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 focus:outline-none w-full h-full' name='descricao' id='descricao' placeholder=''></textarea>
                         </div>
 
                         

@@ -53,7 +53,8 @@ model Anuncio {
 }
 
 model MarcasArma {
-  nome String @id @unique
+  nome   String   @id @unique
+  Modelo Modelo[]
 }
 
 model Calibre {
@@ -62,4 +63,11 @@ model Calibre {
 
 model TipoArma {
   nome String @id @unique
+}
+
+model Modelo {
+  id             String     @id @default(uuid())
+  nome           String
+  marca          MarcasArma @relation(fields: [marcasArmaNome], references: [nome])
+  marcasArmaNome String
 }
