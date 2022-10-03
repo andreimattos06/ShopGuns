@@ -5,6 +5,7 @@ import { CheckSquare } from "phosphor-react";
 
 import { Header } from "../components/forms/header";
 import { Input } from "../components/forms/Input";
+import { Footer } from "../components/forms/footer";
 
 
 async function handleCreateCad(event: FormEvent){
@@ -124,7 +125,9 @@ export default () => (
             
         </div>
 
-   
+
+        <Footer />
+
 
     </div>
 )

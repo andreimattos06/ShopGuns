@@ -1,18 +1,17 @@
 //FUNCAO USADA SIMPLESMENTE PARA AJUSTAR AS INFORMAÇÕES RECEBIDAS DO BD NOS SELECTS
 
 
-export function copiarArray(origem: any[], destino: any[]){
-            destino.pop();
+export function copiarArray(origem: any[]){
+            let retorno = Array();            
 
             origem.map(cada => {
                 cada.map(cada1 => {
-                    destino.push(cada1.nome);
+                    retorno.push(cada1.nome);
                     
                 })
-               
-            console.log(destino)
+
             })
 
 
-    return null;
+    return retorno;
 }

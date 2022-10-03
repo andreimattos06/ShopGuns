@@ -1,4 +1,5 @@
 import React from "react";
+import { Footer } from "../components/forms/footer";
 import { Header } from "../components/forms/header";
 
 export default () => (
@@ -17,6 +18,7 @@ export default () => (
         </div>
       </body>
 
+      <Footer />
 
     </div>
     

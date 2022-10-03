@@ -46,6 +46,40 @@ app.post('/cadastro', async (request, response) => {
     return response.status(201);
 })
 
+app.post('/novoanuncio', async (request, response) => {
+
+    const body: any = request.body;
+
+    const cad = await prisma.anuncio.create({
+        data: {
+
+            
+            cadastroCpf: body.cadastroCpf,
+            tipo: body.tipo,
+            calibre: body.calibre,
+            marca: body.marca,
+            modelo: body.modelo,
+            valor: body.valor,
+            descricao: body.descricao,
+            cidade: body.cidade,
+            estado: body.estado,
+            sistemaRegistro: body.sistemaRegistro,
+            envio: JSON.parse(body.envio),
+            visualizacoesAnuncio: 0,
+
+            fotos: '',
+            qntFotos: 0,
+            prioridade: 1,
+
+            
+        }
+
+        
+    })
+
+    return response.status(201);
+})
+
 app.get('/anuncios', (request, response) => {
     return (''
         

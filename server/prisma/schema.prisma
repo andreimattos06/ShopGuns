@@ -29,7 +29,6 @@ model Cadastro {
 model Anuncio {
   id          String   @id @default(uuid())
   cadastro    Cadastro @relation(fields: [cadastroCpf], references: [cpf])
-  cadastroId  String
   cadastroCpf String
 
   tipo     String
@@ -43,13 +42,12 @@ model Anuncio {
   descricao       String
   cidade          String
   estado          String
-  cep             String
   sistemaRegistro String
   envio           Boolean
 
   visualizacoesAnuncio Int
   prioridade           Int
-  dataCriacao          DateTime
+  dataCriacao          DateTime @default(now())
 }
 
 model MarcasArma {
