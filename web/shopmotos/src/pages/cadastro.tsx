@@ -6,6 +6,7 @@ import { CheckSquare } from "phosphor-react";
 import { Header } from "../components/forms/header";
 import { Input } from "../components/forms/Input";
 import { Footer } from "../components/forms/footer";
+import { SubmitButton } from "../components/forms/submitButton";
 
 
 async function handleCreateCad(event: FormEvent){
@@ -113,10 +114,10 @@ export default () => (
                     </div>
 
                     <div className="flex flex-row-reverse">
-                        <button type="submit" className="flex text-bold text-xl bg-red-800 rounded-md px-4 py-2 gap-2 hover:text-zinc-900 text-zinc-200">
+                        <SubmitButton type="submit">
                             <CheckSquare size={32} />
                             Realizar Cadastro
-                        </button>
+                        </SubmitButton>
 
                     </div>
                                         

@@ -14,6 +14,7 @@ import { DesenharLinha } from "../components/utils/desenharLinha";
 import { copiarArray } from "../components/utils/copiarArray";
 import ReactInputMask from "react-input-mask";
 import { Footer } from "../components/forms/footer";
+import { SubmitButton } from "../components/forms/submitButton";
 
 
 
@@ -309,10 +310,10 @@ export default () => {
                         </div>
 
                         <div className="flex flex-row-reverse">
-                            <button type="submit" className="flex text-bold text-xl bg-red-800 rounded-md px-4 py-2 gap-2 hover:text-zinc-900 text-zinc-200">
+                            <SubmitButton type="submit">
                                 <CheckSquare size={32} />
                                 Realizar Cadastro
-                            </button>
+                            </SubmitButton>
 
                         </div>
 

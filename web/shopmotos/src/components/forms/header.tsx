@@ -3,6 +3,7 @@ import { SignIn, Target, UserPlus, House, User, Table } from 'phosphor-react'
 import { InputHTMLAttributes } from 'react'
 import { Link } from 'react-router-dom'
 import { Input } from './Input'
+import { SubmitButton } from './submitButton'
 
 
 export function Header(){
@@ -24,10 +25,12 @@ export function Header(){
                     </Link>
                     <text className='pt-1.5 text-red-800'>|</text>   
 
-                    <button className='hover:bg-zinc-700 p-2 hover:rounded-md flex'>
-                        <Table size={32} className='text-red-800 pr-1.5'/>
-                        Anúncios
-                    </button> 
+                    <Link to='/anuncios'>
+                        <button className='hover:bg-zinc-700 p-2 hover:rounded-md flex'>
+                            <Table size={32} className='text-red-800 pr-1.5'/>
+                            Anúncios
+                        </button> 
+                    </Link>
 
                     <text className='pt-1.5 text-red-800'>|</text>           
 
@@ -68,10 +71,10 @@ export function Header(){
 
                                     <Dialog.Close>
                                         
-                                        <button className='flex flex-row bg-red-800 rounded-md px-4 py-2 gap-2 hover:text-zinc-900'>
+                                        <SubmitButton>
                                         <SignIn size={26} />
                                         Enviar
-                                        </button>
+                                        </SubmitButton>
                                     </Dialog.Close>
                                 
                                 </div>
@@ -79,10 +82,10 @@ export function Header(){
                                 <div className='order-last'>
 
                                     <Link to='/cadastro'>
-                                        <button className='flex flex-row bg-red-800 rounded-md px-4 py-2 gap-2 hover:text-zinc-900'>
+                                        <SubmitButton>
                                             <UserPlus size={26} />
                                             Cadastre-se
-                                        </button>
+                                        </SubmitButton>
                                     </Link>
 
                                 </div>
