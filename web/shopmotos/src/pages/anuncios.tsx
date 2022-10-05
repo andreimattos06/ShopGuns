@@ -242,6 +242,7 @@ export default () => {
 
             <div className="w-full mr-11 ml-9">
               <ListaAnuncios />
+              <ListaAnuncios />
             </div>
 
 
