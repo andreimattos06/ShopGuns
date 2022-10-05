@@ -7,9 +7,12 @@ import { copiarArray } from "../components/utils/copiarArray";
 import { Form } from 'react-bootstrap';
 import * as RadioGroup from '@radix-ui/react-radio-group';
 
+import { MagnifyingGlass } from "phosphor-react";
+
 import { DesenharLinha } from "../components/utils/desenharLinha";
 
 import { SubmitButton } from "../components/forms/submitButton" ;
+import { ListaAnuncios } from "../components/forms/ListaAnuncios";
 
 interface Infos {
   objeto: any;
@@ -228,7 +231,8 @@ export default () => {
 
               <div className="flex flex-row-reverse">
                   <SubmitButton type="submit">
-                    (Lupa)  Filtrar
+                    <MagnifyingGlass size={28} />
+                    Filtrar
                   </SubmitButton>
 
               </div>
@@ -236,8 +240,8 @@ export default () => {
             </div>
 
 
-            <div className="">
-              B
+            <div className="w-full mr-11 ml-9">
+              <ListaAnuncios />
             </div>
 
 

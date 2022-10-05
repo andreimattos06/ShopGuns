@@ -80,9 +80,12 @@ app.post('/novoanuncio', async (request, response) => {
     return response.status(201);
 })
 
-app.get('/anuncios', (request, response) => {
-    return (''
+app.get('/anuncios', async(request, response) => {
+    const anuncios = await prisma.anuncio.findMany({
         
+    })
+    return (
+        response.json(anuncios)
     )
 })
 
