@@ -109,7 +109,7 @@ app.get('/infosnovoanuncio', async(request, response) => {
     )
 })
 
-app.get('/tiposarmas', async(request, response) => {
+/*app.get('/tiposarmas', async(request, response) => {
     const tipos = await prisma.tipoArma.findMany({
         
     })
@@ -126,6 +126,7 @@ app.get('/calibresarmas', async(request, response) => {
         response.json(calibre)
     )
 })
+*/ 
 /* --------------------FIM Get's para formulario de Novo Anuncio -------------------------------*/
 
 
