@@ -31,13 +31,14 @@ model Anuncio {
   cadastro    Cadastro @relation(fields: [cadastroCpf], references: [cpf])
   cadastroCpf String
 
-  tipo     String
-  calibre  String
-  marca    String
-  modelo   String
-  fotos    String
-  qntFotos Int
-  valor    String
+  tipo          String
+  calibre       String
+  marca         String
+  modelo        String
+  fotoPrincipal String
+  fotos         String
+  qntFotos      Int
+  valor         String
 
   descricao       String
   cidade          String

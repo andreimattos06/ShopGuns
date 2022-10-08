@@ -67,6 +67,7 @@ app.post('/novoanuncio', async (request, response) => {
             envio: JSON.parse(body.envio),
             visualizacoesAnuncio: 0,
 
+            fotoPrincipal: '',
             fotos: '',
             qntFotos: 0,
             prioridade: 1,
@@ -82,12 +83,61 @@ app.post('/novoanuncio', async (request, response) => {
 
 app.get('/anuncios', async(request, response) => {
     const anuncios = await prisma.anuncio.findMany({
+        select:{
+            id: true,       
+            tipo: true,     
+            calibre: true,  
+            marca: true,       
+            fotos: true,    
+            valor: true,           
+            cidade: true,          
+            estado: true,
+            fotoPrincipal: true,        
+
+        }
         
     })
     return (
         response.json(anuncios)
     )
 })
+
+app.get('/anuncios/:id', async(request, response) => {
+    const idAnuncio: string = request.params.id;
+
+
+    const anuncios = await prisma.anuncio.findUnique({
+        select:{
+            id: true,        
+            tipo: true,     
+            calibre: true,  
+            marca: true,    
+            modelo: true,
+            fotoPrincipal: true,   
+            fotos: true,    
+            qntFotos: true,
+            valor: true,    
+            descricao: true,       
+            cidade: true,          
+            estado: true,          
+            sistemaRegistro: true, 
+            envio: true,        
+            visualizacoesAnuncio: true, 
+            prioridade: true,           
+            dataCriacao: true,
+           
+        },
+
+        where:{
+            id : idAnuncio,
+        }
+        
+    })
+    return (
+        response.json(anuncios)
+    )
+})
+
 
 
 /* --------------------COMECO Get's para formulario de Novo Anuncio -------------------------------*/
