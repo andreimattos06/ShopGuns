@@ -36,7 +36,7 @@ const listItems = anuncios.map((anuncio) =>
     <li className='group bg-zinc-800 border-b-2 border-red-800 mb-10'>
         <Link to={anuncio.id}>
             <div className='py-5 px-5 grid grid-cols-12 gap-5 relative group-hover:bg-zinc-700'>
-                <div className='col-span-3  h-48 max-h-48'>
+                <div className='col-span-3  h-52 max-h-52'>
                     <img className="w-full h-full" src={anuncio.fotoPrincipal} alt='Foto não Encontrada'></img>
                 </div>
                 <div className='col-span-2 flex flex-col gap-1 relative'>

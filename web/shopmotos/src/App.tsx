@@ -14,7 +14,7 @@ import Cadastro from './pages/cadastro';
 import Novoanuncio from './pages/novoanuncio';
 import { useEffect, useState } from 'react';
 import Anuncios from './pages/anuncios';
-import { Detalhesanuncio } from './components/forms/Detalhesanuncio';
+import { Detalhesanuncio } from './pages/Detalhesanuncio';
 
 
 
