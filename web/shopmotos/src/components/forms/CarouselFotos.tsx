@@ -66,14 +66,15 @@ export function CarouselFotos(){
                 <div className='col-span-5'>
                     <div className='grid grid-cols-4 gap-3'>
                         <div className='col-span-2 flex flex-col pt-6 pb-6 pl-6 uppercase bg-zinc-800 border-t-2 border-red-800'>
-                            <text className='font-bold text-5xl text-zinc-200'>{anuncio?.marca}</text>
-                            <text className='font-semibold text-3xl text-red-800'>{anuncio?.calibre}</text>
-                            <text className='font-medium text-xl text-zinc-200 pt-20'>{anuncio?.tipo}</text>
+                            <text className='font-bold text-4xl text-zinc-200'>{anuncio?.marca}</text>
+                            <text className='font-bold text-3xl text-red-800'>{anuncio?.modelo}</text>
+                            <text className='font-semibold text-2xl text-zinc-200'>{anuncio?.calibre}</text>
+                            <text className='font-medium text-xl text-zinc-500 pt-20'>{anuncio?.tipo}</text>
                         </div>
 
                         <div className='col-span-2 grid grid-rows-4 items-center bg-zinc-800 border-b-2 border-red-800'>
                             <div className='row-span-3 place-self-center'>
-                                <text className='font-bold text-5xl text-zinc-200'>R${anuncio?.valor}</text>
+                                <text className='font-bold text-[40px] text-zinc-200'>R${anuncio?.valor}</text>
                             </div>
                             <div className='row-span-1 place-self-center'>
 
@@ -82,9 +83,10 @@ export function CarouselFotos(){
                             </div>
                         </div>
 
-                        <div className='col-span-4 bg-zinc-800 flex flex-col pt-6 pb-6 pl-6'>
-                            <div className='font-semibold text-2xl text-zinc-200'>
-                                <text>Descrição:</text>
+                        <div className='col-span-4 bg-zinc-800 flex flex-col pt-6 pb-6 pl-6 border-b-2 border-red-800'>
+                            <div className='text-zinc-200 flex flex-col gap-3'>
+                                <text className='font-bold text-2xl'>Descrição:</text>
+                                <text>{anuncio?.descricao}</text>
                             </div>
                             
                         </div>

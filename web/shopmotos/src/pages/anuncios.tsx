@@ -102,7 +102,7 @@ export default () => {
         </header>  
 
         <body>
-          <div className="flex flex-row mt-32">
+          <div className="flex flex-row mt-20">
 
             <div>
               <div className="ml-11 bg-zinc-800 flex-col text-zinc-200 px-14 py-10">

@@ -93,7 +93,7 @@ app.get('/anuncios', async(request, response) => {
             cidade: true,          
             estado: true,
             fotoPrincipal: true,        
-
+            modelo: true,
         }
         
     })
