@@ -9,12 +9,12 @@ import { SubmitButton } from './submitButton'
 export function Header(){
     return(
             <div className='flex justify-between p-1 bg-zinc-800 border-red-800 border-solid border-b-2'>
-                <div className='pl-8 py-4 text-bold flex flex-justify text-zinc-200 gap-7'>
-                    
-                    <button className='text-2xl'><Target size={40} className='text-red-800'/></button>
-                    <button className='text-2xl'>SHOP-GUNS</button>
+                <div className='pl-8 text-bold flex flex-justify text-zinc-200 gap-7 max-h-32'>
+
+                    <img src='../public/logotransparente.png' className=''/>
+
                 </div>
-                <div className='pr-8 py-4 text-2xl flex flex-justify text-zinc-200 gap-6 '>
+                <div className='pr-8 py-1 text-2xl flex justify-center items-center text-zinc-200 gap-6 '>
 
                     <Link to='/'>
                         
@@ -32,18 +32,20 @@ export function Header(){
                         </button> 
                     </Link>
 
-                    <text className='pt-1.5 text-red-800'>|</text>           
+                    <text className='pt-1.5 text-red-800'>|</text>
 
+                    <div>
+                        
                     <Dialog.Root>
-                    <Dialog.Trigger>
+                        <Dialog.Trigger>
 
-                        <button className='hover:text-red-800 bg-zinc-700 p-2 rounded-md flex'>
-                            <User size={32} className='text-red-800 pr-1.5'/>
-                            Login
-                        </button>                 
-                                
+                            <button className='hover:text-red-800 bg-zinc-700 p-2 rounded-md flex'>
+                                <User size={32} className='text-red-800 pr-1.5'/>
+                                Login
+                            </button>                 
+                                    
 
-                    </Dialog.Trigger>
+                        </Dialog.Trigger>
                         <Dialog.Portal>
 
                         <Dialog.Content className='fixed bg-zinc-800 px-16 pb-12 pt-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 shadow-lg shadow-black/25 w-2/6 rounded-md'>
@@ -96,6 +98,10 @@ export function Header(){
                         </Dialog.Portal>
                     </Dialog.Root>
 
+                    
+                    </div>           
+
+                    
                                 
                 </div>
             </div>

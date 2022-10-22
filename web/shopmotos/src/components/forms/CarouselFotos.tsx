@@ -43,8 +43,8 @@ export function CarouselFotos(){
     
 
     const carouselFotosLista = listaFotos?.map(foto =>
-        <div>
-            <img src={foto} alt="Foto Genérica"/>
+        <div className='h-full'>
+            <img className='h-full'  src={foto} alt="Erro ao Carregar a Foto!"/>
         </div>
     );
 
@@ -55,8 +55,9 @@ export function CarouselFotos(){
         <div className='w-auto mt-14 grid grid-cols-8 mx-11 gap-10'>
 
                 <div className='col-span-3'>
-                    <div className='border-red-800 border-2 rounded-sm w-auto'>
-                        <Carousel className='w-full h-full' infiniteLoop={true} autoPlay={true} interval={5000} showThumbs={false} showStatus={false}>
+                    <div className='border-red-800 border-2 rounded-sm w-auto h-full bg-zinc-800 flex'>
+                        <Carousel className='w-full h-full' infiniteLoop={true} showThumbs={false} showStatus={false} 
+                               >
                             {carouselFotosLista}
                         </Carousel>
                     </div>
@@ -65,7 +66,7 @@ export function CarouselFotos(){
 
                 <div className='col-span-5'>
                     <div className='grid grid-cols-4 gap-3'>
-                        <div className='col-span-2 flex flex-col pt-6 pb-6 pl-6 uppercase bg-zinc-800 border-t-2 border-red-800'>
+                        <div className='col-span-2 flex flex-col pt-6 pb-6 pl-6 uppercase bg-zinc-800 border-b-2 border-red-800'>
                             <text className='font-bold text-4xl text-zinc-200'>{anuncio?.marca}</text>
                             <text className='font-bold text-3xl text-red-800'>{anuncio?.modelo}</text>
                             <text className='font-semibold text-2xl text-zinc-200'>{anuncio?.calibre}</text>
