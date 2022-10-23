@@ -4,6 +4,16 @@ import { useParams } from 'react-router-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 
+import '../../styles/global.css';
+import { EnvelopeOpen, IdentificationBadge, Monitor, Package, WhatsappLogo } from 'phosphor-react';
+
+
+interface Contato {
+    nomeCompleto: String,
+    email: String,
+    contato: String,
+
+}
 
 interface Anuncio {
     tipo: String,
@@ -16,9 +26,10 @@ interface Anuncio {
     estado: String,
     sistemaRegistro: String,
     fotoPrincipal: String,
-    envio: String,
+    envio: Boolean,
     fotos: String,
     id: String,
+    cadastro: Contato,
 }
 
 export function CarouselFotos(){
@@ -48,14 +59,14 @@ export function CarouselFotos(){
         </div>
     );
 
-    console.log(carouselFotosLista)
+    console.log(anuncio?.cadastro)
 
     return(
 
         <div className='w-auto mt-14 grid grid-cols-8 mx-11 gap-10'>
 
                 <div className='col-span-3'>
-                    <div className='border-red-800 border-2 rounded-sm w-auto h-full bg-zinc-800 flex'>
+                    <div className='border-red-800 border-2 rounded-sm w-auto h-fullflex'>
                         <Carousel className='w-full h-full' infiniteLoop={true} showThumbs={false} showStatus={false} 
                                >
                             {carouselFotosLista}
@@ -82,6 +93,66 @@ export function CarouselFotos(){
                                 <text className='font-medium text-base text-zinc-200'>{anuncio?.cidade} - {anuncio?.estado}</text>
                                 
                             </div>
+                        </div>
+
+                        <div className='col-span-4 bg-zinc-800 border-b-2 border-red-800 pt-6 pb-6 pl-6 text-zinc-200 flex flex-col'>
+                            <text className='font-bold text-2xl'>Informações Adicionais:</text>
+                            <div className='flex flex-row pt-3 gap-10 '>
+                                <div className='flex flex-row gap-2 '>
+                                    <div className='font-semibold text-xl text-zinc-200 flex flex-row gap-1'>
+                                        <Package size={22} className='mt-[3px]'/>
+                                        <text> 
+                                            
+                                            Realiza Envio: 
+                                        </text>
+                                    </div>
+                                    
+                                    <text className='font-semibold text-xl text-red-700'>{anuncio?.envio ? 'SIM' : 'Não'}</text>
+                                </div>
+
+                                <div className='flex flex-row gap-2'>
+                                    <div className='font-semibold text-xl text-zinc-200 flex flex-row gap-1'>
+
+                                        <Monitor size={22} className='mt-[3px]'/>
+                                        <text className='font-semibold text-xl text-zinc-200'> Sistema de Registro: </text>
+                                     
+                                    </div>
+
+                                    <text className='font-semibold text-xl text-red-700 uppercase'>{anuncio?.sistemaRegistro}</text>
+                                    
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                        <div className='col-span-4 bg-zinc-800 border-b-2 border-red-800 pt-6 pb-6 pl-6 pr-6 text-zinc-200 flex flex-col'>
+                            <text className='font-bold text-2xl'>Contato:</text>
+
+                            <div className='flex flex-row pt-3 gap-10'>
+
+                                <div className='gap-1 font-semibold text-xl flex flex-row'>
+                                    <IdentificationBadge size={22} className='mt-[3px]' weight="bold"/>
+                                            
+                                    <text>{anuncio?.cadastro.nomeCompleto}</text>
+                                </div>
+
+                                <div className='gap-1 font-semibold text-xl flex flex-row'>
+                                    <WhatsappLogo size={22} className='mt-[3px]' weight="bold"/>
+                                            
+                                    <text>{anuncio?.cadastro.contato}</text>
+                                </div>
+
+                                <div className='gap-1 font-semibold text-xl flex flex-row'>
+                                    <EnvelopeOpen size={22} className='mt-[3px]' weight="bold"/>
+                                            
+                                    <text>{anuncio?.cadastro.email}</text>
+                                </div>
+
+                            </div>
+                            
+
                         </div>
 
                         <div className='col-span-4 bg-zinc-800 flex flex-col pt-6 pb-6 pl-6 border-b-2 border-red-800'>

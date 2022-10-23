@@ -125,18 +125,28 @@ app.get('/anuncios/:id', async(request, response) => {
             visualizacoesAnuncio: true, 
             prioridade: true,           
             dataCriacao: true,
+
+            cadastro: {
+                select: {
+                    nomeCompleto: true,
+                    email: true,
+                    contato: true,
+                }
+            },
            
         },
 
         where:{
             id : idAnuncio,
-        }
+        },
+
         
     })
     return (
         response.json(anuncios)
     )
 })
+
 
 
 

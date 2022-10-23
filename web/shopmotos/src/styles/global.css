@@ -1,0 +1,20 @@
+.carousel .control-next.control-arrow:before{
+
+    width: 20px;
+    border-left: 15px solid rgb(153,27,27);
+
+}
+
+.carousel .control-prev.control-arrow:before{
+    
+    width: 20px;
+    border-right: 15px solid rgb(153,27,27);
+
+}
+
+
+.carousel .control-dots .dot{
+    background: rgb(153,27,27)
+}
+
+
