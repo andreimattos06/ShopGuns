@@ -19,6 +19,28 @@ const prisma = new PrismaClient({
     log: ['query']
 })
 
+app.post('/login', async (request, response) => {
+
+    const body: any = request.body;
+
+    const idLogin = await prisma.cadastro.findUniqueOrThrow({
+        where: {
+            email_password: {
+                email: body.email,
+                password: body.password,
+            }               
+        },
+        select: {
+            email: true,
+        }
+    })
+
+    return response.json(idLogin);
+        
+})
+
+    
+
 app.post('/cadastro', async (request, response) => {
 
     const body: any = request.body;

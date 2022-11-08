@@ -1,12 +1,40 @@
 import * as Dialog from '@radix-ui/react-dialog'
-import { SignIn, Target, UserPlus, House, User, Table } from 'phosphor-react'
-import { InputHTMLAttributes } from 'react'
-import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { SignIn, Target, UserPlus, House, User, Table, Password } from 'phosphor-react'
+import { FormEvent, InputHTMLAttributes, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import { Input } from './Input'
 import { SubmitButton } from './submitButton'
 
 
+async function handleLoginUser(event: FormEvent) {
+
+    event.preventDefault();
+
+    const formData = new FormData(event.target as HTMLFormElement);
+    const data = Object.fromEntries(formData);
+
+    console.log(data.email)
+    
+
+    try {
+        await axios.post('http://localhost:3334/login', {
+            data:{
+                email: data.email,
+                password: data.senha,
+            }
+        })
+        alert('Ok!')
+    }
+    catch(err){
+        alert('a')
+    }
+    
+    console.log('aa')
+}
+
 export function Header(){
+
     return(
             <div className='flex justify-between p-1 bg-zinc-800 border-red-800 border-solid border-b-2'>
                 <div className='pl-8 text-bold flex flex-justify text-zinc-200 gap-7 max-h-32'>
@@ -55,44 +83,48 @@ export function Header(){
 
                             </Dialog.Title>                   
 
-                            <form>
+                            <form onSubmit={handleLoginUser}>
 
                                 <div className='flex flex-col text-zinc-200 text-lg pt-7'>
-                                <label htmlFor='email' className='font-bold pb-2'>E Mail:</label>
-                                <Input id='email' placeholder='exemplo@gmail.com'></Input>
+                                    <label htmlFor='email' className='font-bold pb-2'>E Mail:</label>
+                                    <Input name="email" id='email' placeholder='exemplo@gmail.com'></Input>
 
-                                <label htmlFor='senha' className='font-bold pb-2 pt-6'>Senha:</label>
-                                <Input id='senha' placeholder='*******'></Input>
+                                    <label htmlFor='senha' className='font-bold pb-2 pt-6'>Senha:</label>
+                                    <Input name="senha" type="password" id='senha' placeholder='*******'></Input>
                                 </div>
 
-                            </form>   
-
-                            <div className='flex justify-between text-zinc-200 font-semibold pt-10'>
-
-                                <div className='order-first'> 
-
-                                    <Dialog.Close>
-                                        
-                                        <SubmitButton>
-                                        <SignIn size={26} />
-                                        Enviar
-                                        </SubmitButton>
-                                    </Dialog.Close>
                                 
-                                </div>
 
-                                <div className='order-last'>
+                              
 
-                                    <Link to='/cadastro'>
-                                        <SubmitButton>
-                                            <UserPlus size={26} />
-                                            Cadastre-se
-                                        </SubmitButton>
-                                    </Link>
+                                <div className='flex justify-between text-zinc-200 font-semibold pt-10'>
 
-                                </div>
-                            
-                            </div>           
+                                    <div className='order-first'> 
+
+                                        
+                                            
+                                            <SubmitButton type="submit">
+                                                <SignIn size={26} />
+                                                Enviar
+                                            </SubmitButton>
+                                        
+                                    
+                                    </div>
+
+                                    <div className='order-last'>
+
+                                        <Link to='/cadastro'>
+                                            <SubmitButton>
+                                                <UserPlus size={26} />
+                                                Cadastre-se
+                                            </SubmitButton>
+                                        </Link>
+
+                                    </div>
+                                
+                                </div> 
+
+                            </form>           
 
                         </Dialog.Content>
                         </Dialog.Portal>

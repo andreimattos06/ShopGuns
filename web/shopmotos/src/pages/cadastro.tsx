@@ -34,6 +34,7 @@ async function handleCreateCad(event: FormEvent){
 
         alert('Cadastro criado com sucesso!')
 
+
     }catch(err){
         alert('Erro ao criar cadastro');
         console.log(err);
