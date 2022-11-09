@@ -23,7 +23,7 @@ app.post('/login', async (request, response) => {
 
     const body: any = request.body;
 
-    const idLogin = await prisma.cadastro.findUniqueOrThrow({
+    const idLogin = await prisma.cadastro.findUnique({
         where: {
             email_password: {
                 email: body.email,
@@ -35,7 +35,15 @@ app.post('/login', async (request, response) => {
         }
     })
 
-    return response.json(idLogin);
+    if(idLogin){
+        return response.json(idLogin);
+    }
+    else{
+        idLogin!.email = ""
+        return response.json(idLogin);
+    }
+
+    
         
 })
 
