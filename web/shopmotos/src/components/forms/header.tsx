@@ -2,10 +2,12 @@ import * as Dialog from '@radix-ui/react-dialog'
 import * as NavigationMenu from '@radix-ui/react-navigation-menu'
 import axios from 'axios'
 import { SignIn, Target, UserPlus, House, User, Table, Password } from 'phosphor-react'
-import { FormEvent, InputHTMLAttributes, useState } from 'react'
+import { FormEvent, InputHTMLAttributes, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Input } from './Input'
 import { SubmitButton } from './submitButton'
+import Dropdown from 'react-bootstrap/Dropdown';
+import { DesenharLinha } from '../utils/desenharLinha'
 
 
 
@@ -14,6 +16,21 @@ export function Header(){
 
     const [tokenLogin, setTokenLogin] = useState<String>();
     console.log(tokenLogin)
+
+
+
+    function verLogin () {
+        const token = localStorage.getItem('login');
+        if (token){
+            setTokenLogin(token);
+        }
+        else{
+            setTokenLogin(undefined);
+        }
+    }
+
+
+
 
     async function handleLoginUser(event: FormEvent) {
 
@@ -31,6 +48,7 @@ export function Header(){
                 
             }).then(function(response) {
                 setTokenLogin(response.data.email);
+                localStorage.setItem('login', response.data.email);
                 
             })
             
@@ -41,9 +59,6 @@ export function Header(){
         
     
     }
-
-
-
 
     let header;
     if(!tokenLogin?.localeCompare("undefined")){
@@ -123,34 +138,43 @@ export function Header(){
                     <NavigationMenu.Item>
                         <NavigationMenu.Trigger>Meu Cadastro</NavigationMenu.Trigger>
 
-                        <NavigationMenu.Content>
-                            <div>
+                        <NavigationMenu.Content className='mr-5'>
+                            <i className=' border-red-800 border-b-0 border-r-0 bg-zinc-800 border-2 pb-3 pl-3 rotate-45 absolute inline-flex left-3 top-[2px] z-20'></i>
+
+                            
+                            <div className='bg-zinc-800 border-red-800 border-2 py-5 px-4 flex flex-col rounded-md text-lg gap-3 mt-2 z-10'>
                                 <div>
-                                    a
+                                    Meus Anúncios
                                 </div>
+                                <DesenharLinha cor="rgb(157,27,27)" tamanho="2px"/>
                                 <div>
-                                    b
+                                    Alterar Dados
                                 </div>
+                                <DesenharLinha cor="rgb(157,27,27)" tamanho="2px"/>
                                 <div>
-                                    b
-                                </div>
-                                <div>
-                                    <button onClick={e => {setTokenLogin(undefined)}}>Sair</button>
+                                    <button onClick={e => {setTokenLogin(undefined); localStorage.removeItem("login");}}>Sair</button>
                                 </div>
                             </div>
+                            
                         </NavigationMenu.Content>
+                        
                     </NavigationMenu.Item>
                     
                     <NavigationMenu.Indicator/>
+                    
                 </NavigationMenu.List>
+                
 
-                <NavigationMenu.Viewport className='absolute border-red-800 border-2 overflow-visible'/>
+                <NavigationMenu.Viewport className='absolute overflow-visible'/>
             </NavigationMenu.Root>
                 
         
     }
 
 
+    useEffect(() => {
+        verLogin();
+    }, [])
     return(
             <div className='flex justify-between p-1 bg-zinc-800 border-red-800 border-solid border-b-2'>
                 <div className='pl-8 text-bold flex flex-justify text-zinc-200 gap-7 max-h-32'>
