@@ -15,6 +15,7 @@ import Novoanuncio from './pages/novoanuncio';
 import { useEffect, useState } from 'react';
 import Anuncios from './pages/anuncios';
 import { Detalhesanuncio } from './pages/Detalhesanuncio';
+import AnunciosUsuario from './pages/anunciosUsuario';
 
 
 
@@ -32,6 +33,7 @@ function App() {
           <Route path='/cadastro' element={<Cadastro />} />
           <Route path='/novoanuncio' element={<Novoanuncio />} />
           <Route path='/anuncios/:id' element={<Detalhesanuncio />} />
+          <Route path='/anunciosusuario' element={<AnunciosUsuario />} />
         </Routes>
 
       </BrowserRouter>

@@ -132,6 +132,40 @@ app.get('/anuncios', async(request, response) => {
     )
 })
 
+app.post('/anunciosusuario', async(request, response) => {
+
+    const body: any = request.body;
+
+    const anunciosUser = await prisma.cadastro.findUnique({
+        where:{
+            email: body.token,
+
+        },
+                
+        select:{
+            anuncios: {
+                select:{
+                    id: true,       
+                    tipo: true,     
+                    calibre: true,  
+                    marca: true,       
+                    fotos: true,    
+                    valor: true,           
+                    cidade: true,          
+                    estado: true,
+                    fotoPrincipal: true,        
+                    modelo: true,
+                }
+            }
+        }
+        
+        
+    })
+    return (
+        response.json(anunciosUser)
+    )
+})
+
 app.get('/anuncios/:id', async(request, response) => {
     const idAnuncio: string = request.params.id;
 

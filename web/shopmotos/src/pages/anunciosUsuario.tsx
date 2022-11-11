@@ -12,7 +12,7 @@ import { MagnifyingGlass } from "phosphor-react";
 import { DesenharLinha } from "../components/utils/desenharLinha";
 
 import { SubmitButton } from "../components/forms/submitButton" ;
-import { ListaAnuncios } from "../components/forms/ListaAnuncios";
+import { ListaAnunciosUsuario } from "../components/forms/ListaAnunciosUsuario";
 
 interface Infos {
   objeto: any;
@@ -40,18 +40,7 @@ export default () => {
   /*----------------------------INICIO Pegar Opções para os Selects do BD ----------------------------------------*/
   const [infos, setInfos] = useState<Infos[]>([]);
 
-
-  useEffect(() => {                      //DESTA FORMA O USEEFFECT
-      fetch('http://localhost:3334/infosnovoanuncio') //EXECUTA APENAS 1 X
-          .then(response => response.json())
-          .then(data => {                                                           //PEGA NO BD AS OPCOES PARA PREENCHER OS SELECTS
-              setInfos(data)
-
-          })
-
-
-  }, [])
-
+  
   const marcas = copiarArray(infos.slice(0, 1));                                                     //VARIAVEIS PARA OS SELECTS
   const tipos = copiarArray(infos.slice(1, 2));
   const calibres = copiarArray(infos.slice(2, 3));
@@ -210,7 +199,7 @@ export default () => {
 
 
             <div className="w-full mr-11 ml-9">
-              <ListaAnuncios />
+              <ListaAnunciosUsuario />
             </div>
 
 

@@ -3,7 +3,7 @@ import * as NavigationMenu from '@radix-ui/react-navigation-menu'
 import axios from 'axios'
 import { SignIn, Target, UserPlus, House, User, Table, Password } from 'phosphor-react'
 import { FormEvent, InputHTMLAttributes, useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, Route, useParams } from 'react-router-dom'
 import { Input } from './Input'
 import { SubmitButton } from './submitButton'
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -15,7 +15,6 @@ import { DesenharLinha } from '../utils/desenharLinha'
 export function Header(){
 
     const [tokenLogin, setTokenLogin] = useState<String>();
-    console.log(tokenLogin)
 
 
 
@@ -144,7 +143,10 @@ export function Header(){
                             
                             <div className='bg-zinc-800 border-red-800 border-2 py-5 px-4 flex flex-col rounded-md text-lg gap-3 mt-2 z-10'>
                                 <div>
+                                    <Link to='/anunciosusuario'>
                                     Meus Anúncios
+                                    </Link>
+                                    
                                 </div>
                                 <DesenharLinha cor="rgb(157,27,27)" tamanho="2px"/>
                                 <div>
