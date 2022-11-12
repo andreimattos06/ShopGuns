@@ -104,6 +104,36 @@ app.post('/cadastro', async (request, response) => {
     return response.status(201);
 })
 
+app.post('/atualizarcadastro', async (request, response) => {
+
+    const body: any = request.body;
+
+    const cad = await prisma.cadastro.update({
+        where:{
+            cpf: body.cpf,
+        },
+        data: {
+
+            cpf: body.cpf,
+            email: body.email,
+            password: body.password,
+            nomeCompleto: body.nomeCompleto,
+            logradouro: body.logradouro,
+            endereco: body.endereco,
+            numero: body.numero,
+            bairro: body.bairro,
+            cidade: body.cidade,
+            estado: body.estado,
+            contato: body.contato,
+
+        }
+        
+        
+    })
+
+    return null;
+})
+
 app.post('/novoanuncio', async (request, response) => {
 
     const body: any = request.body;

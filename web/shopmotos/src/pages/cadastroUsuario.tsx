@@ -41,8 +41,40 @@ export default () => {
         })
     },[])
 
+
+    async function handleSubmit(event: FormEvent){
+
+        event.preventDefault();
+
+        const formData = new FormData(event.target as HTMLFormElement);
+        const data = Object.fromEntries(formData);
+
+        try {
+            await axios.post('http://localhost:3334/atualizarcadastro', {
+                cpf : data.cpf,
+                email: data.email,
+                password: data.password,
+                nomeCompleto: data.nomeCompleto,
+                logradouro: data.logradouro,
+                endereco : data.endereco,
+                numero: data.numero,
+                bairro: data.bairro,
+                cidade: data.cidade,
+                estado: data.estado,
+                contato: data.contato
+            })
+
+            
+        }catch{
+
+        }
+
+    }
+
     
     return(
+
+    
 
         <div className='flex flex-col'>
         
@@ -54,61 +86,61 @@ export default () => {
                         Alterar Cadastro
                     </text>
                     
-                    <form className="">
+                    <form onSubmit={handleSubmit} className="">
                         <div className="grid grid-cols-2 mt-14 text-zinc-200 text-xl">
                             <div className="flex flex-col pr-5 pb-5">
                                 <label htmlFor='nomeCompleto' className='font-bold pb-2'>Nome Completo:</label>
-                                <Input className="h-96" name='nomeCompleto' id='nomeCompleto' placeholder='José da Silva' value={cadastro?.nomeCompleto}></Input>
+                                <Input className="h-96" name='nomeCompleto' id='nomeCompleto' placeholder='José da Silva' defaultValue={cadastro?.nomeCompleto}></Input>
                             </div>
 
                             <div className='flex flex-col'>
                                 <label htmlFor='email' className='font-bold pb-2'>Email:</label>
-                                <Input name='email' id='email' placeholder='exemplo@gmail.com' value={cadastro?.email}></Input>
+                                <Input name='email' id='email' placeholder='exemplo@gmail.com' defaultValue={cadastro?.email}></Input>
                             </div>
 
                             <div className='flex flex-col pr-5 pb-5'>
                                 <label htmlFor='password' className='font-bold pb-2'>Senha:</label>
-                                <Input name='password' id='password' placeholder='********' value={cadastro?.password}></Input>
+                                <Input name='password' id='password' placeholder='********' defaultValue={cadastro?.password}></Input>
                             </div>
 
                             <div className='flex flex-col'>
                                 <label htmlFor='cpf' className='font-bold pb-2'>CPF:</label>
-                                <Input name='cpf' id='cpf' placeholder='111.222.333-44' value={cadastro?.cpf}></Input>
+                                <Input name='cpf' id='cpf' placeholder='111.222.333-44' defaultValue={cadastro?.cpf}></Input>
                             </div>
 
                             <div className='flex flex-col pr-5 pb-5'>
                                 <label htmlFor='logradouro' className='font-bold pb-2'>Logradouro:</label>
-                                <Input name='logradouro' id='logradouro' placeholder='Av.' value={cadastro?.logradouro}></Input>
+                                <Input name='logradouro' id='logradouro' placeholder='Av.' defaultValue={cadastro?.logradouro}></Input>
                             </div>
 
                             <div className='flex flex-col'>
                                 <label htmlFor='endereco' className='font-bold pb-2'>Endereço:</label>
-                                <Input name='endereco' id='endereco' placeholder='Jardim dos Ipes' value={cadastro?.endereco}></Input>
+                                <Input name='endereco' id='endereco' placeholder='Jardim dos Ipes' defaultValue={cadastro?.endereco}></Input>
                             </div>
 
                             <div className='flex flex-col pr-5 pb-5'>
                                 <label htmlFor='numero' className='font-bold pb-2'>Numero:</label>
-                                <Input name='numero' id='numero' placeholder='22' value={cadastro?.numero}></Input>
+                                <Input name='numero' id='numero' placeholder='22' defaultValue={cadastro?.numero}></Input>
                             </div>
 
                             <div className='flex flex-col'>
                                 <label htmlFor='bairro' className='font-bold pb-2'>Bairro:</label>
-                                <Input name='bairro' id='bairro' placeholder='Centro' value={cadastro?.bairro}></Input>
+                                <Input name='bairro' id='bairro' placeholder='Centro' defaultValue={cadastro?.bairro}></Input>
                             </div>
 
                             <div className='flex flex-col pr-5 pb-5'>
                                 <label htmlFor='cidade' className='font-bold pb-2'>Cidade:</label>
-                                <Input name='cidade' id='cidade' placeholder='Caldas Novas' value={cadastro?.cidade}></Input>
+                                <Input name='cidade' id='cidade' placeholder='Caldas Novas' defaultValue={cadastro?.cidade}></Input>
                             </div>
 
                             <div className='flex flex-col'>
                                 <label htmlFor='estado' className='font-bold pb-2'>Estado:</label>
-                                <Input name='estado' id='estado' placeholder='Goiás' value={cadastro?.estado}></Input>
+                                <Input name='estado' id='estado' placeholder='Goiás' defaultValue={cadastro?.estado}></Input>
                             </div>
 
                             <div className='flex flex-col pr-5 pb-16'>
                                 <label htmlFor='contato' className='font-bold pb-2'>Contato:</label>
-                                <Input name='contato' id='contato' placeholder='(64) 99999-8888' value={cadastro?.contato}></Input>
+                                <Input name='contato' id='contato' placeholder='(64) 99999-8888' defaultValue={cadastro?.contato}></Input>
                             </div>
 
                             
@@ -117,7 +149,7 @@ export default () => {
                         <div className="flex flex-row-reverse">
                             <SubmitButton type="submit">
                                 <CheckSquare size={32} />
-                                Realizar Cadastro
+                                Atualizar Informações
                             </SubmitButton>
 
                         </div>
