@@ -7,12 +7,13 @@ import { copiarArray } from "../components/utils/copiarArray";
 import { Form } from 'react-bootstrap';
 import * as RadioGroup from '@radix-ui/react-radio-group';
 
-import { MagnifyingGlass } from "phosphor-react";
+import { MagnifyingGlass, Plus } from "phosphor-react";
 
 import { DesenharLinha } from "../components/utils/desenharLinha";
 
 import { SubmitButton } from "../components/forms/submitButton" ;
 import { ListaAnunciosUsuario } from "../components/forms/ListaAnunciosUsuario";
+import { Link } from "react-router-dom";
 
 interface Infos {
   objeto: any;
@@ -199,6 +200,15 @@ export default () => {
 
 
             <div className="w-full mr-11 ml-9">
+              <div className="flex flex-row-reverse pb-5">
+                <Link to="/novoanuncio">
+                  <SubmitButton type="submit">
+                    <Plus size={28} />
+                    Novo Anúncio
+                  </SubmitButton>
+                </Link>
+                
+              </div>
               <ListaAnunciosUsuario />
             </div>
 

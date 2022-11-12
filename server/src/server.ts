@@ -47,7 +47,35 @@ app.post('/login', async (request, response) => {
         
 })
 
+app.post('/dadosusuario', async (request, response) => {
+
+    const body: any = request.body;
+
+    const dados = await prisma.cadastro.findUnique({
+        where:{
+            email: body.token,
+        },
+        select:{
+            cpf: true,           
+            email: true,         
+            password: true,     
+            nomeCompleto: true, 
+            logradouro: true,   
+            endereco: true,     
+            numero: true,       
+            bairro: true,       
+            cidade: true,       
+            estado: true,       
+            contato: true, 
+        }
+    })
+
+
+return response.json(dados)
     
+
+
+})    
 
 app.post('/cadastro', async (request, response) => {
 
@@ -80,33 +108,52 @@ app.post('/novoanuncio', async (request, response) => {
 
     const body: any = request.body;
 
-    const cad = await prisma.anuncio.create({
-        data: {
-
-            
-            cadastroCpf: body.cadastroCpf,
-            tipo: body.tipo,
-            calibre: body.calibre,
-            marca: body.marca,
-            modelo: body.modelo,
-            valor: body.valor,
-            descricao: body.descricao,
-            cidade: body.cidade,
-            estado: body.estado,
-            sistemaRegistro: body.sistemaRegistro,
-            envio: JSON.parse(body.envio),
-            visualizacoesAnuncio: 0,
-
-            fotoPrincipal: '',
-            fotos: '',
-            qntFotos: 0,
-            prioridade: 1,
-
-            
+    const cpfUser = await prisma.cadastro.findUnique({
+        where:{
+            email: body.cadastroEmail,
+        },
+        select:{
+            cpf: true,
         }
-
-        
     })
+
+
+
+    if(cpfUser){
+
+        const cad = await prisma.anuncio.create({
+            data: {
+    
+                
+                cadastroCpf: cpfUser["cpf"],
+                tipo: body.tipo,
+                calibre: body.calibre,
+                marca: body.marca,
+                modelo: body.modelo,
+                valor: body.valor,
+                descricao: body.descricao,
+                cidade: body.cidade,
+                estado: body.estado,
+                sistemaRegistro: body.sistemaRegistro,
+                envio: JSON.parse(body.envio),
+                visualizacoesAnuncio: 0,
+    
+                fotoPrincipal: '',
+                fotos: '',
+                qntFotos: 0,
+                prioridade: 1,
+    
+                
+            }
+    
+            
+        })
+        
+    }else{
+
+    }
+
+    
 
     return response.status(201);
 })

@@ -1,7 +1,7 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import * as NavigationMenu from '@radix-ui/react-navigation-menu'
 import axios from 'axios'
-import { SignIn, Target, UserPlus, House, User, Table, Password } from 'phosphor-react'
+import { SignIn, Target, UserPlus, House, User, Table, Password, UserCircle } from 'phosphor-react'
 import { FormEvent, InputHTMLAttributes, useEffect, useState } from 'react'
 import { Link, Route, useParams } from 'react-router-dom'
 import { Input } from './Input'
@@ -135,7 +135,15 @@ export function Header(){
             <NavigationMenu.Root className='text-zinc-200'>
                 <NavigationMenu.List>
                     <NavigationMenu.Item>
-                        <NavigationMenu.Trigger>Meu Cadastro</NavigationMenu.Trigger>
+                        
+                            <NavigationMenu.Trigger className='flex flex-row'>
+                                
+                                <UserCircle size={34} weight="light" className='text-red-800 pr-1.5'/>
+                                Meu Cadastro
+                                
+                                
+                            </NavigationMenu.Trigger>
+                                              
 
                         <NavigationMenu.Content className='mr-5'>
                             <i className=' border-red-800 border-b-0 border-r-0 bg-zinc-800 border-2 pb-3 pl-3 rotate-45 absolute inline-flex left-3 top-[2px] z-20'></i>
@@ -150,7 +158,9 @@ export function Header(){
                                 </div>
                                 <DesenharLinha cor="rgb(157,27,27)" tamanho="2px"/>
                                 <div>
-                                    Alterar Dados
+                                    <Link to='/cadastrousuario'>
+                                        Alterar Dados
+                                    </Link>
                                 </div>
                                 <DesenharLinha cor="rgb(157,27,27)" tamanho="2px"/>
                                 <div>

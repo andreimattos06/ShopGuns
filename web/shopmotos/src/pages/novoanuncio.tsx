@@ -44,7 +44,7 @@ async function handleCreateAnuncio(event: FormEvent) {
     try {
         await axios.post('http://localhost:3334/novoanuncio', {
 
-            cadastroCpf: data.cadastroCpf,
+            cadastroEmail: localStorage.getItem("login"),
             tipo: data.tipo,
             calibre: data.calibre,
             marca: data.marca,
@@ -161,7 +161,7 @@ export default () => {
 
                             <div className='flex flex-col'>
                                 <label htmlFor='modelo' className='font-bold pb-2'>Modelo:</label>
-                                <Input name='modelo' id='modelo' placeholder='111.222.333-44'></Input>
+                                <Input name='modelo' id='modelo' placeholder='G29'></Input>
                             </div>
 
                             <div className="flex flex-col col-span-2">              {/*Radio Group do Sistema de Registro*/}
@@ -316,12 +316,6 @@ export default () => {
                             </SubmitButton>
 
                         </div>
-
-                        <div>
-                            <label>CadastroCPF</label>
-                            <Input name='cadastroCpf' id='cadastroCpf' placeholder='Goiás'></Input>
-                        </div>
-
 
                     </form>
                 </div>
