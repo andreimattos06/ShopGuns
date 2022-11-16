@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FormEvent } from 'react';
 import axios from 'axios'; 
 import { CheckSquare } from "phosphor-react";
@@ -7,6 +7,7 @@ import { Header } from "../components/forms/header";
 import { Input } from "../components/forms/Input";
 import { Footer } from "../components/forms/footer";
 import { SubmitButton } from "../components/forms/submitButton";
+import { Form } from "react-bootstrap";
 
 
 async function handleCreateCad(event: FormEvent){
@@ -43,7 +44,55 @@ async function handleCreateCad(event: FormEvent){
     
 }
 
-export default () => (
+interface Estado{
+    id: string,
+    sigla: string,
+    nome: string,
+}
+
+interface Municipio{
+    id: string,
+    nome: string,
+}
+
+export default () => {
+    
+    const [estado, setEstado] = useState<Estado[]>();
+    const [municipio, setMunicipio] = useState<Municipio[]>();
+
+
+    async function handleEstado(event: FormEvent){
+
+        let siglaBusca = event.target.value;
+
+        let idBusca = estado?.find(e => e.sigla == siglaBusca)
+
+        const todas_cidades = await axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${idBusca.id}/municipios?orderBy=nome`);
+        setMunicipio(todas_cidades["data"]);
+
+
+    }
+
+
+    useEffect(() => {
+        
+        (async function getEstados(){
+            const todos_estados = await axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome');
+            setEstado(todos_estados["data"]);
+
+            const todas_cidades = await axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/11/municipios?orderBy=nome`);
+            setMunicipio(todas_cidades["data"]);
+        })();
+       
+
+    }, [])
+
+    useEffect(() => {
+        console.log("a")
+    },[estado])
+    
+
+    return(
     <div className='flex flex-col'>
     
         <Header />
@@ -96,14 +145,34 @@ export default () => (
                             <Input name='bairro' id='bairro' placeholder='Centro'></Input>
                         </div>
 
-                        <div className='flex flex-col pr-5 pb-5'>
-                            <label htmlFor='cidade' className='font-bold pb-2'>Cidade:</label>
-                            <Input name='cidade' id='cidade' placeholder='Caldas Novas'></Input>
+                        <div className="flex flex-col pr-5">              {/*Input para o Estado*/}
+                            <label htmlFor='tipo' className='font-bold pb-2'>Estado:</label>
+                            <Form.Select onChange={handleEstado} name="estado" aria-label="Selecione o estado" className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 focus:outline-none">
+                                <option disabled={true} >Selecione:</option>
+                                {estado?.map(cada => {
+                                    return(<option value={cada.sigla}>
+                                                {cada.sigla}
+                                            </option>)
+                                    
+                                    })}
+
+                                                                
+
+                            </Form.Select>
                         </div>
 
-                        <div className='flex flex-col'>
-                            <label htmlFor='estado' className='font-bold pb-2'>Estado:</label>
-                            <Input name='estado' id='estado' placeholder='Goiás'></Input>
+                        <div className="flex flex-col">              {/*Input para O Municipio*/}
+                            <label htmlFor='tipo' className='font-bold pb-2'>Cidade:</label>
+                            <Form.Select name="tipo" aria-label="Selecione o estado" className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 focus:outline-none">
+                                <option disabled={true} >Selecione:</option>
+                                {municipio?.map(cada => {
+                                    return(<option value={cada.nome}>{cada.nome}</option>)
+                                    
+                                    })}
+
+                                                                
+
+                            </Form.Select>
                         </div>
 
                         <div className='flex flex-col pr-5 pb-16'>
@@ -132,4 +201,4 @@ export default () => (
 
 
     </div>
-)
+)}
