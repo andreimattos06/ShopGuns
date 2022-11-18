@@ -288,6 +288,52 @@ app.get('/anuncios/:id', async(request, response) => {
     )
 })
 
+app.post('/anunciosfiltrados', async(request, response) => {
+    
+    const body: any = request.body;
+
+
+    const anuncios = await prisma.anuncio.findMany({
+        select:{
+            id: true,        
+            tipo: true,     
+            calibre: true,  
+            marca: true,    
+            modelo: true,
+            fotoPrincipal: true,   
+            fotos: true,    
+            qntFotos: true,
+            valor: true,    
+            descricao: true,       
+            cidade: true,          
+            estado: true,          
+            sistemaRegistro: true, 
+            envio: true,        
+            visualizacoesAnuncio: true, 
+            prioridade: true,           
+            dataCriacao: true,
+
+            cadastro: {
+                select: {
+                    nomeCompleto: true,
+                    email: true,
+                    contato: true,
+                }
+            },
+           
+        },
+
+        where:{
+            tipo: body.tipo,
+        },
+
+        
+    })
+    return (
+        response.json(anuncios)
+    )
+})
+
 
 
 

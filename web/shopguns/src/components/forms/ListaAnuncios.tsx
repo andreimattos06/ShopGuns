@@ -3,6 +3,7 @@ import { InputHTMLAttributes, useEffect, useState } from 'react'
 import { CaretRight } from "phosphor-react";
 
 import { Link, useParams } from 'react-router-dom'
+import axios from 'axios';
 
 interface SubmitButtonProps extends InputHTMLAttributes<HTMLInputElement> {
 
@@ -21,15 +22,33 @@ interface Anuncio {
     fotoPrincipal: string,
 }
 
-export function ListaAnuncios(props){
+interface Filtro {
+    tipo: string,
+}
 
+export function ListaAnuncios(props: Filtro){
 
 const [anuncios, setAnuncios] = useState<Anuncio[]>([]);
 
 
 useEffect(() =>{
-    fetch('http://localhost:3334/anuncios').then(response => response.json()).then(data =>{setAnuncios(data)})
-},[])
+
+    async function getAnunciosFiltrados (){
+       await axios.post('http://localhost:3334/anunciosfiltrados', {
+            tipo: props.tipo,
+       }).then(function(response) {
+        setAnuncios(response.data)
+       });
+    }
+    
+    if (anuncios.length == 0){
+        fetch('http://localhost:3334/anuncios').then(response => response.json()).then(data =>{setAnuncios(data)})
+    }
+    else{
+        getAnunciosFiltrados();
+    }
+    
+},[props])
 
 
 const listItems = anuncios.map((anuncio) =>

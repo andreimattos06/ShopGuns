@@ -31,7 +31,7 @@ interface TipoArma {
 }
 
 
-
+let tipoInput: string = "";
 
 
 export default () => {
@@ -39,18 +39,34 @@ export default () => {
 
   /*----------------------------INICIO Pegar Opções para os Selects do BD ----------------------------------------*/
   const [infos, setInfos] = useState<Infos[]>([]);
+  const [filtro, setFiltro] = useState(0);
+  const [lista_anuncio, setListaAnuncio] = useState(<ListaAnuncios tipo=""/>);
 
+  
 
-  useEffect(() => {                      //DESTA FORMA O USEEFFECT
-      fetch('http://localhost:3334/infosnovoanuncio') //EXECUTA APENAS 1 X
-          .then(response => response.json())
-          .then(data => {                                                           //PEGA NO BD AS OPCOES PARA PREENCHER OS SELECTS
-              setInfos(data)
+  useEffect(() => { //DESTA FORMA O USEEFFECT
 
-          })
+    async function getInfos () {
+      await fetch('http://localhost:3334/infosnovoanuncio') //EXECUTA APENAS 1 X
+        .then(response => response.json())
+        .then(data => {                                                           //PEGA NO BD AS OPCOES PARA PREENCHER OS SELECTS
+            setInfos(data)
 
+      })
+    }
 
+    getInfos()
   }, [])
+
+
+
+  useEffect(() => {
+    if (filtro > 0) {
+      setListaAnuncio(<ListaAnuncios tipo={tipoInput}/>)
+    }
+  },[filtro])
+
+
 
   const marcas = copiarArray(infos.slice(0, 1));                                                     //VARIAVEIS PARA OS SELECTS
   const tipos = copiarArray(infos.slice(1, 2));
@@ -82,9 +98,9 @@ export default () => {
 
                 <div className="flex flex-col pb-5 pt-8">              {/*Input para o Tipo de Armamento*/}
                   <label htmlFor='tipo' className='font-bold pb-2'>Tipo do Armamento:</label>
-                  <Form.Select name="tipo" aria-label="Selecione o tipo do armamento" className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 focus:outline-none">
+                  <Form.Select onChange={(event) => {tipoInput = event.target.value}} name="tipo" aria-label="Selecione o tipo do armamento" className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 focus:outline-none">
                       <option disabled={true} >Selecione:</option>
-                      <option>Todos</option>
+                      <option value="">Todos</option>
                       {tipos.map(tipo => {
                           return (
                               <option value={tipo}>
@@ -100,6 +116,7 @@ export default () => {
                     <label htmlFor='calibre' className='font-bold pb-2'>Calibre:</label>
                     <Form.Select name="calibre" aria-label="Selecione o calibre" className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 focus:outline-none">
                         <option disabled={true} >Selecione:</option>
+                        <option>Todos</option>
                         {calibres.map(calibre => {
                             return (
                                 <option value={calibre}>
@@ -115,6 +132,7 @@ export default () => {
                     <label htmlFor='marca' className='font-bold pb-2'>Marca:</label>
                     <Form.Select name="marca" aria-label="Selecione a marca" className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 focus:outline-none">
                         <option disabled={true} >Selecione:</option>
+                        <option value="Todas">Todas</option>
                         {marcas.map(marca => {
                             return (
                                 <option value={marca}>
@@ -198,7 +216,7 @@ export default () => {
                 </div>
 
                 <div className="flex flex-row-reverse">
-                    <SubmitButton type="submit">
+                    <SubmitButton  onClick={e => {setFiltro(filtro+1)}}>
                       <MagnifyingGlass size={28} />
                       Filtrar
                     </SubmitButton>
@@ -210,7 +228,7 @@ export default () => {
 
 
             <div className="w-full mr-11 ml-9">
-              <ListaAnuncios />
+              {lista_anuncio}
             </div>
 
 
