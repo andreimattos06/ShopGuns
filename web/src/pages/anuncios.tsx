@@ -33,6 +33,11 @@ interface TipoArma {
 
 let tipoInput: string = "Todos";
 let calibreInput: string = "Todos";
+let marcaInput: string = "Todas";
+let modeloInput: string = "";
+let registroInput: string = "Ambos";
+let cidadeInput: string = "";
+let estadoInput: string = "";
 
 
 export default () => {
@@ -41,7 +46,7 @@ export default () => {
   /*----------------------------INICIO Pegar Opções para os Selects do BD ----------------------------------------*/
   const [infos, setInfos] = useState<Infos[]>([]);
   const [filtro, setFiltro] = useState(0);
-  const [lista_anuncio, setListaAnuncio] = useState(<ListaAnuncios tipo="Todos" calibre="Todos"/>);
+  const [lista_anuncio, setListaAnuncio] = useState(<ListaAnuncios tipo="Todos" calibre="Todos" marca="Todas" modelo="" registro="Ambos" cidade="" estado=""/>);
 
   
 
@@ -63,7 +68,7 @@ export default () => {
 
   useEffect(() => {
     if (filtro > 0) {
-      setListaAnuncio(<ListaAnuncios tipo={tipoInput} calibre={calibreInput}/>)
+      setListaAnuncio(<ListaAnuncios tipo={tipoInput} calibre={calibreInput} marca={marcaInput} modelo={modeloInput} registro={registroInput} cidade={cidadeInput} estado={estadoInput} />)
       console.log(tipoInput + "  " + calibreInput)
     }
   },[filtro])
@@ -132,7 +137,7 @@ export default () => {
 
                 <div className='flex flex-col pb-5'>             {/*Input para a Marca*/}
                     <label htmlFor='marca' className='font-bold pb-2'>Marca:</label>
-                    <Form.Select name="marca" aria-label="Selecione a marca" className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 focus:outline-none">
+                    <Form.Select onChange={(event) => {marcaInput = event.target.value}} name="marca" aria-label="Selecione a marca" className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 focus:outline-none">
                         <option disabled={true} >Selecione:</option>
                         <option value="Todas">Todas</option>
                         {marcas.map(marca => {
@@ -150,7 +155,7 @@ export default () => {
 
                 <div className='flex flex-col pb-5'>
                     <label htmlFor='modelo' className='font-bold pb-2'>Modelo:</label>
-                    <Input name='modelo' id='modelo' placeholder='111.222.333-44'></Input>
+                    <Input onChange={(event) => {modeloInput = event.target.value}} name='modelo' id='modelo' placeholder='111.222.333-44'></Input>
                 </div>
 
                 <div className="flex flex-col col-span-2 pb-5">              {/*Radio Group do Sistema de Registro*/}
@@ -158,7 +163,7 @@ export default () => {
 
                     <div className="flex pt-3 pb-5">
 
-                        <RadioGroup.Root name="sistemaRegistro" className="text-zinc-200 text-lg flex flex-row">
+                        <RadioGroup.Root onValueChange={value => {registroInput = value}} name="sistemaRegistro" className="text-zinc-200 text-lg flex flex-row">
 
                             <div className="gap-3 flex flex-row pr-8">
 
@@ -188,7 +193,7 @@ export default () => {
 
                             <div className="gap-3 flex">
 
-                                <RadioGroup.Item value="outro" className="bg-zinc-900 rounded-full w-9 h-9 hover:border-2 hover:border-red-900 
+                                <RadioGroup.Item value="Ambos" className="bg-zinc-900 rounded-full w-9 h-9 hover:border-2 hover:border-red-900 
                                                             focus:border-2 focus:border-red-900">
 
                                     <RadioGroup.Indicator className="flex justify-center items-center w-full h-full relative
@@ -209,12 +214,12 @@ export default () => {
 
                 <div className='flex flex-col pb-5'>
                     <label htmlFor='cidade' className='font-bold pb-2'>Cidade:</label>
-                    <Input name='cidade' id='cidade' placeholder='Caldas Novas'></Input>
+                    <Input onChange={(event) => {cidadeInput = event.target.value}} name='cidade' id='cidade' placeholder='Caldas Novas'></Input>
                 </div>
 
                 <div className='flex flex-col pb-8'>
                     <label htmlFor='estado' className='font-bold pb-2'>Estado:</label>
-                    <Input name='estado' id='estado' placeholder='Goiás'></Input>
+                    <Input onChange={(event) => {estadoInput = event.target.value}} name='estado' id='estado' placeholder='Goiás'></Input>
                 </div>
 
                 <div className="flex flex-row-reverse">

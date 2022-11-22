@@ -298,7 +298,15 @@ app.post('/anunciosfiltrados', async(request, response) => {
         where:{
 
             tipo: body.tipo,
-            calibre: body.calibre,            
+            calibre: body.calibre,  
+            marca: body.marca,
+            modelo: body.modelo,
+            sistemaRegistro: body.registro,
+            cadastro:{
+                cidade: body.cidade,
+                estado: body.estado, 
+            }
+                     
 
         },            
 

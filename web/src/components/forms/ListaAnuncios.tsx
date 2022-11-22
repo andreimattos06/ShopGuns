@@ -25,6 +25,11 @@ interface Anuncio {
 interface Filtro {
     tipo: string,
     calibre: string,
+    marca: string,
+    modelo: string,
+    registro: string,
+    cidade: string,
+    estado: string,
 }
 
 export function ListaAnuncios(props: Filtro){
@@ -33,16 +38,23 @@ const [anuncios, setAnuncios] = useState<Anuncio[]>([]);
 
 
 useEffect(() =>{
+    console.log(props)
 
     async function getAnunciosFiltrados (){
        await axios.post('http://localhost:3334/anunciosfiltrados', {
             tipo: ((props.tipo == "Todos") ? undefined : props.tipo),
             calibre: ((props.calibre == "Todos") ? undefined : props.calibre),
+
+            marca: ((props.marca == "Todas") ? undefined : props.marca),
+            modelo: ((props.modelo == "") ? undefined : props.modelo),
+            registro: ((props.registro == "Ambos") ? undefined : props.registro),
+            cidade: ((props.cidade == "") ? undefined : props.cidade),
+            estado: ((props.estado == "") ? undefined : props.estado),
        }).then(function(response) {
         setAnuncios(response.data)
        });
     }
-
+    
     getAnunciosFiltrados();
 
     
