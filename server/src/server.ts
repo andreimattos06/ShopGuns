@@ -297,18 +297,19 @@ app.post('/anunciosfiltrados', async(request, response) => {
     const anuncios = await prisma.anuncio.findMany({
         where:{
 
+
+            cidade: body.cidade,
+            estado: body.estado,
             tipo: body.tipo,
             calibre: body.calibre,  
             marca: body.marca,
             modelo: body.modelo,
             sistemaRegistro: body.registro,
-            cadastro:{
-                cidade: body.cidade,
-                estado: body.estado, 
-            }
-                     
 
-        },            
+            
+                                    
+
+        },
 
         select:{
             id: true,        
@@ -331,9 +332,9 @@ app.post('/anunciosfiltrados', async(request, response) => {
 
             cadastro: {
                 select: {
-                    nomeCompleto: true,
-                    email: true,
-                    contato: true,
+                    cidade: true,
+                    estado: true,
+                    
                 }
             },
            
