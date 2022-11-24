@@ -30,14 +30,26 @@ interface TipoArma {
   objeto: any[];
 }
 
+interface Estado{
+  id: string,
+  sigla: string,
+  nome: string,
+}
+
+interface Municipio{
+  id: string,
+  nome: string,
+}
+
+
 
 let tipoInput: string = "Todos";
 let calibreInput: string = "Todos";
 let marcaInput: string = "Todas";
 let modeloInput: string = "";
 let registroInput: string = "Ambos";
-let cidadeInput: string = "";
-let estadoInput: string = "";
+let cidadeInput: string = "Todas";
+let estadoInput: string = "Todos";
 
 
 export default () => {
@@ -46,8 +58,9 @@ export default () => {
   /*----------------------------INICIO Pegar Opções para os Selects do BD ----------------------------------------*/
   const [infos, setInfos] = useState<Infos[]>([]);
   const [filtro, setFiltro] = useState(0);
-  const [lista_anuncio, setListaAnuncio] = useState(<ListaAnuncios tipo="Todos" calibre="Todos" marca="Todas" modelo="" registro="Ambos" cidade="" estado=""/>);
-
+  const [lista_anuncio, setListaAnuncio] = useState(<ListaAnuncios tipo="Todos" calibre="Todos" marca="Todas" modelo="" registro="Ambos" cidade="Todas" estado="Todos"/>);
+  const [estado, setEstado] = useState<Estado[]>();
+  const [municipio, setMunicipio] = useState<Municipio[]>();
   
 
   useEffect(() => { //DESTA FORMA O USEEFFECT
@@ -72,6 +85,37 @@ export default () => {
       console.log(tipoInput + "  " + calibreInput)
     }
   },[filtro])
+
+
+
+
+  async function handleEstado(event: FormEvent){
+
+    let siglaBusca = event.target.value;
+
+    estadoInput = siglaBusca;
+
+    let idBusca: any = estado?.find(e => e.sigla == siglaBusca)
+
+    const todas_cidades = await axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${idBusca.id}/municipios?orderBy=nome`);
+    setMunicipio(todas_cidades["data"]);
+
+
+  }
+
+
+  useEffect(() => {
+      
+      (async function getEstados(){
+          const todos_estados = await axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome');
+          setEstado(todos_estados["data"]);
+
+          const todas_cidades = await axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/11/municipios?orderBy=nome`);
+          setMunicipio(todas_cidades["data"]);
+      })();
+    
+
+  }, [])
 
 
 
@@ -155,7 +199,7 @@ export default () => {
 
                 <div className='flex flex-col pb-5'>
                     <label htmlFor='modelo' className='font-bold pb-2'>Modelo:</label>
-                    <Input onChange={(event) => {modeloInput = event.target.value}} name='modelo' id='modelo' placeholder='111.222.333-44'></Input>
+                    <Input onChange={(event) => {modeloInput = event.target.value}} name='modelo' id='modelo' placeholder='Todos'></Input>
                 </div>
 
                 <div className="flex flex-col col-span-2 pb-5">              {/*Radio Group do Sistema de Registro*/}
@@ -163,7 +207,7 @@ export default () => {
 
                     <div className="flex pt-3 pb-5">
 
-                        <RadioGroup.Root onValueChange={value => {registroInput = value}} name="sistemaRegistro" className="text-zinc-200 text-lg flex flex-row">
+                        <RadioGroup.Root defaultValue="Ambos" onValueChange={value => {registroInput = value}} name="sistemaRegistro" className="text-zinc-200 text-lg flex flex-row">
 
                             <div className="gap-3 flex flex-row pr-8">
 
@@ -213,13 +257,35 @@ export default () => {
                 </div>
 
                 <div className='flex flex-col pb-5'>
-                    <label htmlFor='cidade' className='font-bold pb-2'>Cidade:</label>
-                    <Input onChange={(event) => {cidadeInput = event.target.value}} name='cidade' id='cidade' placeholder='Caldas Novas'></Input>
+                    <label htmlFor='estado' className='font-bold pb-2'>Estado:</label>
+                    <Form.Select onChange={handleEstado} name="estado" aria-label="Selecione o estado" className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 focus:outline-none">
+                                <option disabled={true} >Selecione:</option>
+                                <option value="Todos">Todos</option>
+                                {estado?.map(cada => {
+                                    return(<option value={cada.sigla}>
+                                                {cada.sigla}
+                                            </option>)
+                                    
+                                    })}
+
+                                                                
+
+                            </Form.Select>
                 </div>
 
                 <div className='flex flex-col pb-8'>
-                    <label htmlFor='estado' className='font-bold pb-2'>Estado:</label>
-                    <Input onChange={(event) => {estadoInput = event.target.value}} name='estado' id='estado' placeholder='Goiás'></Input>
+                    <label htmlFor='cidade' className='font-bold pb-2'>Cidade:</label>
+                    <Form.Select onChange={(event) => {cidadeInput = event.target.value}} name="tipo" aria-label="Selecione a cidade" className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 focus:outline-none">
+                                <option disabled={true} >Selecione:</option>
+                                <option value="Todas">Todas</option>
+                                {municipio?.map(cada => {
+                                    return(<option value={cada.nome}>{cada.nome}</option>)
+                                    
+                                    })}
+
+                                                                
+
+                            </Form.Select>
                 </div>
 
                 <div className="flex flex-row-reverse">

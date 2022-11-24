@@ -37,6 +37,7 @@ export function ListaAnuncios(props: Filtro){
 const [anuncios, setAnuncios] = useState<Anuncio[]>([]);
 
 
+
 useEffect(() =>{
     console.log(props)
 
@@ -48,8 +49,8 @@ useEffect(() =>{
             marca: ((props.marca == "Todas") ? undefined : props.marca),
             modelo: ((props.modelo == "") ? undefined : props.modelo),
             registro: ((props.registro == "Ambos") ? undefined : props.registro),
-            cidade: ((props.cidade == "") ? undefined : props.cidade),
-            estado: ((props.estado == "") ? undefined : props.estado),
+            cidade: ((props.cidade == "Todas") ? undefined : props.cidade),
+            estado: ((props.estado == "Todos") ? undefined : props.estado),
        }).then(function(response) {
         setAnuncios(response.data)
        });
