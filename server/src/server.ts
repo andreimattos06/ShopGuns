@@ -232,6 +232,7 @@ app.post('/anunciosusuario', async(request, response) => {
                     estado: true,
                     fotoPrincipal: true,        
                     modelo: true,
+                    sistemaRegistro: true,
                 }
             }
         }

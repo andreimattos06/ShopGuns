@@ -39,7 +39,7 @@ const [anuncios, setAnuncios] = useState<Anuncio[]>([]);
 
 
 useEffect(() =>{
-    console.log(props)
+
 
     async function getAnunciosFiltrados (){
        await axios.post('http://localhost:3334/anunciosfiltrados', {
