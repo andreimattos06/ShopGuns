@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { PrismaClient } from '@prisma/client'
+import { Anuncio, Prisma, PrismaClient } from '@prisma/client'
 
 
 const app = express()
@@ -289,6 +289,51 @@ app.get('/anuncios/:id', async(request, response) => {
     )
 })
 
+app.get('/anunciosusuario/:id', async(request, response) => {
+    const idAnuncio: string = request.params.id;
+
+
+    const anuncios = await prisma.anuncio.findUnique({
+        select:{
+            id: true,        
+            tipo: true,     
+            calibre: true,  
+            marca: true,    
+            modelo: true,
+            fotoPrincipal: true,   
+            fotos: true,    
+            qntFotos: true,
+            valor: true,    
+            descricao: true,       
+            cidade: true,          
+            estado: true,          
+            sistemaRegistro: true, 
+            envio: true,        
+            visualizacoesAnuncio: true, 
+            prioridade: true,           
+            dataCriacao: true,
+
+            cadastro: {
+                select: {
+                    nomeCompleto: true,
+                    email: true,
+                    contato: true,
+                }
+            },
+           
+        },
+
+        where:{
+            id : idAnuncio,
+        },
+
+        
+    })
+    return (
+        response.json(anuncios)
+    )
+})
+
 app.post('/anunciosfiltrados', async(request, response) => {
     
     const body: any = request.body;
@@ -348,6 +393,46 @@ app.post('/anunciosfiltrados', async(request, response) => {
     return (
         response.json(anuncios)
     )
+})
+
+app.post('/excluiranuncio/:id', async (request, response) => {
+    const body: any = request.body;
+    const idAnuncio: string = request.params.id;
+
+    const anuncioExcluido = await prisma.anuncio.findUnique({
+        where:{
+            id : idAnuncio,
+        },
+    })
+    
+
+   /* const [anuncioInativo ,anuncioExc] = await prisma.$transaction([
+            prisma.anunciosInativos.create({
+                data:{
+                    
+                    cadastroCpf: anuncioExcluido?.cadastroCpf, 
+                    tipo: anuncioExcluido?.tipo, 
+                    calibre: anuncioExcluido?.calibre,
+                    marca: anuncioExcluido?.marca,
+                    modelo: anuncioExcluido?.modelo,
+                    valor: anuncioExcluido?.valor,
+                    descricao: anuncioExcluido?.descricao, 
+                    cidade: anuncioExcluido?.cidade,
+                    estado: anuncioExcluido?.estado,
+                    sistemaRegistro: anuncioExcluido?.sistemaRegistro,
+                    envio: anuncioExcluido?.envio,
+                    visualizacoesAnuncio: anuncioExcluido?.visualizacoesAnuncio,
+                    fotoPrincipal: anuncioExcluido?.fotoPrincipal, 
+                    fotos: anuncioExcluido?.fotos, 
+                    qntFotos: anuncioExcluido?.qntFotos, 
+                    prioridade: anuncioExcluido?.prioridade, 
+        
+                }
+            })
+
+    ])
+    */
+
 })
 
 

@@ -17,6 +17,7 @@ import Anuncios from './pages/anuncios';
 import { Detalhesanuncio } from './pages/Detalhesanuncio';
 import AnunciosUsuario from './pages/anunciosUsuario';
 import CadastroUsuario from './pages/cadastroUsuario';
+import { DetalhesAnuncioUsuario } from './pages/detalhesAnuncioUsuario';
 
 
 
@@ -34,6 +35,7 @@ function App() {
           <Route path='/cadastro' element={<Cadastro />} />
           <Route path='/novoanuncio' element={<Novoanuncio />} />
           <Route path='/anuncios/:id' element={<Detalhesanuncio />} />
+          <Route path='/anunciosusuario/:id' element={<DetalhesAnuncioUsuario />} />
           <Route path='/anunciosusuario' element={<AnunciosUsuario />} />
           <Route path='/cadastrousuario' element={<CadastroUsuario />} />
         </Routes>

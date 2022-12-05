@@ -23,12 +23,38 @@ model Cadastro {
   estado       String
   contato      String
 
-  anuncios Anuncio[]
+  anuncios         Anuncio[]
+  anunciosInativos AnunciosInativos[]
 
   @@id([email, password])
 }
 
 model Anuncio {
+  id          String   @id @default(uuid())
+  cadastro    Cadastro @relation(fields: [cadastroCpf], references: [cpf])
+  cadastroCpf String
+
+  tipo          String
+  calibre       String
+  marca         String
+  modelo        String
+  fotoPrincipal String
+  fotos         String
+  qntFotos      Int
+  valor         String
+
+  descricao       String
+  cidade          String
+  estado          String
+  sistemaRegistro String
+  envio           Boolean
+
+  visualizacoesAnuncio Int
+  prioridade           Int
+  dataCriacao          DateTime @default(now())
+}
+
+model AnunciosInativos {
   id          String   @id @default(uuid())
   cadastro    Cadastro @relation(fields: [cadastroCpf], references: [cpf])
   cadastroCpf String
