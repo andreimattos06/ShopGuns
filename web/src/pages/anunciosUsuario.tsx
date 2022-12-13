@@ -82,7 +82,7 @@ export default () => {
 
 
   async function handleEstado(event: FormEvent){
-
+    //@ts-ignore
     let siglaBusca = event.target.value;
 
     estadoInput = siglaBusca;

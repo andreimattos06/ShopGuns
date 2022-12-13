@@ -10,7 +10,7 @@ module.exports = {
     extend: {
 
       backgroundImage: {
-        'malha': "url('./fundo.jpg')",        
+        'malha': "url('src/public/fundo.jpg')",        
       }
 
     },

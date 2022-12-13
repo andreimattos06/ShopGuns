@@ -1,4 +1,4 @@
-
+//@ts-ignore
 export function DesenharLinha(props){
     return(
 

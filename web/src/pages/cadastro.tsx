@@ -61,11 +61,12 @@ export default () => {
 
 
     async function handleEstado(event: FormEvent){
-
+        //@ts-ignore
         let siglaBusca = event.target.value;
 
         let idBusca = estado?.find(e => e.sigla == siglaBusca)
 
+        //@ts-ignore
         const todas_cidades = await axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${idBusca.id}/municipios?orderBy=nome`);
         setMunicipio(todas_cidades["data"]);
 

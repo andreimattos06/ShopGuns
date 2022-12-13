@@ -191,7 +191,7 @@ export function Header(){
             <div className='flex justify-between p-1 bg-zinc-800 border-red-800 border-solid border-b-2'>
                 <div className='pl-8 text-bold flex flex-justify text-zinc-200 gap-7 max-h-32'>
 
-                    <img src='../public/logotransparente.png' className=''/>
+                    <img src='src/public/logotransparente.png' className=''/>
 
                 </div>
 

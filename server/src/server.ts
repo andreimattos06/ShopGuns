@@ -406,32 +406,40 @@ app.post('/excluiranuncio/:id', async (request, response) => {
     })
     
 
-   /* const [anuncioInativo ,anuncioExc] = await prisma.$transaction([
+    const [anuncioInativo ,anuncioExc] = await prisma.$transaction([
             prisma.anunciosInativos.create({
                 data:{
                     
-                    cadastroCpf: anuncioExcluido?.cadastroCpf, 
-                    tipo: anuncioExcluido?.tipo, 
-                    calibre: anuncioExcluido?.calibre,
-                    marca: anuncioExcluido?.marca,
-                    modelo: anuncioExcluido?.modelo,
-                    valor: anuncioExcluido?.valor,
-                    descricao: anuncioExcluido?.descricao, 
-                    cidade: anuncioExcluido?.cidade,
-                    estado: anuncioExcluido?.estado,
-                    sistemaRegistro: anuncioExcluido?.sistemaRegistro,
-                    envio: anuncioExcluido?.envio,
-                    visualizacoesAnuncio: anuncioExcluido?.visualizacoesAnuncio,
-                    fotoPrincipal: anuncioExcluido?.fotoPrincipal, 
-                    fotos: anuncioExcluido?.fotos, 
-                    qntFotos: anuncioExcluido?.qntFotos, 
-                    prioridade: anuncioExcluido?.prioridade, 
+                    cadastroCpf: String(anuncioExcluido?.cadastroCpf), 
+                    tipo: String(anuncioExcluido?.tipo), 
+                    calibre: String(anuncioExcluido?.calibre),
+                    marca: String(anuncioExcluido?.marca),
+                    modelo: String(anuncioExcluido?.modelo),
+                    valor: String(anuncioExcluido?.valor),
+                    descricao: String(anuncioExcluido?.descricao), 
+                    cidade: String(anuncioExcluido?.cidade),
+                    estado: String(anuncioExcluido?.estado),
+                    sistemaRegistro: String(anuncioExcluido?.sistemaRegistro),
+                    envio: Boolean(anuncioExcluido?.envio),
+                    visualizacoesAnuncio: Number(anuncioExcluido?.visualizacoesAnuncio),
+                    fotoPrincipal: String(anuncioExcluido?.fotoPrincipal), 
+                    fotos: String(anuncioExcluido?.fotos), 
+                    qntFotos: Number(anuncioExcluido?.qntFotos), 
+                    prioridade: Number(anuncioExcluido?.prioridade), 
         
                 }
-            })
+            }),
 
+    
+            prisma.anuncio.delete({
+                where:{
+                    id : idAnuncio,
+                },
+            })
     ])
-    */
+
+    return(response.json(alert("Transacao realizada com sucesso!")))
+    
 
 })
 

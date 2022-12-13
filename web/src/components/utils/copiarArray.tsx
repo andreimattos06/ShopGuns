@@ -5,6 +5,7 @@ export function copiarArray(origem: any[]){
             let retorno = Array();            
 
             origem.map(cada => {
+                //@ts-ignore
                 cada.map(cada1 => {
                     retorno.push(cada1.nome);
                     
