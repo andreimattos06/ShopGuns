@@ -8,12 +8,8 @@ const app = express()
 app.use(express.json())
 
 
-app.use(cors({
-    
-    "origin": "*",
-    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-
-}))
+// Allow CORS for all routes on the server
+app.use(cors())
 
 const prisma = new PrismaClient({
     log: ['query']

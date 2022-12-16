@@ -14,8 +14,10 @@ async function handleCreateCad(event: FormEvent){
 
     event.preventDefault();
 
+
     const formData = new FormData(event.target as HTMLFormElement);
     const data = Object.fromEntries(formData);
+
 
     try{
 
@@ -142,7 +144,7 @@ export default () => {
                             <Input name='bairro' id='bairro' placeholder='Centro'></Input>
                         </div>
 
-                        <div className="flex flex-col pr-5">              {/*Input para o Estado*/}
+                        <div className="flex flex-col pr-5 pb-5">              {/*Input para o Estado*/}
                             <label htmlFor='tipo' className='font-bold pb-2'>Estado:</label>
                             <Form.Select onChange={handleEstado} name="estado" aria-label="Selecione o estado" className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 focus:outline-none">
                                 <option disabled={true} >Selecione:</option>
@@ -159,8 +161,8 @@ export default () => {
                         </div>
 
                         <div className="flex flex-col">              {/*Input para O Municipio*/}
-                            <label htmlFor='tipo' className='font-bold pb-2'>Cidade:</label>
-                            <Form.Select name="tipo" aria-label="Selecione o estado" className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 focus:outline-none">
+                            <label htmlFor='cidade' className='font-bold pb-2'>Cidade:</label>
+                            <Form.Select name="cidade" aria-label="Selecione o estado" className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 focus:outline-none">
                                 <option disabled={true} >Selecione:</option>
                                 {municipio?.map(cada => {
                                     return(<option value={cada.nome}>{cada.nome}</option>)

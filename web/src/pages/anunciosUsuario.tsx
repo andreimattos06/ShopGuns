@@ -291,7 +291,16 @@ export default () => {
             </div>
           </div>
 
-          <div className="w-full mr-11 ml-9">
+          <div className="w-full mr-11 ml-9 flex flex-col">
+              <div className="flex pb-5">
+                <Link to="/novoanuncio">
+                  <SubmitButton>
+                      <Plus size={28} />
+                      Novo Anúncio
+                  </SubmitButton>
+                </Link>
+              </div>
+
               <ListaAnunciosUsuario tipo={tipoInput} calibre={calibreInput} marca={marcaInput} modelo={modeloInput} registro={registroInput} cidade={cidadeInput} estado={estadoInput} />
           </div>
 
