@@ -22,23 +22,3 @@
 
 
 
-
-**Imagens:**
-
-
-
-![Lista Anúncios + Filtro](https://www.imagemhost.com.br/images/2022/12/16/Lista-Anuncios--Filtro.png)
-
-![Lista Anuncios do Usuario](https://www.imagemhost.com.br/images/2022/12/16/Lista-Anuncios-do-Usuario.png)
-
-![Home + Login](https://www.imagemhost.com.br/images/2022/12/16/Home--Login.png)
-
-![Detalhes Anuncio pelo Usuario](https://www.imagemhost.com.br/images/2022/12/16/Detalhes-Anuncio-pelo-Usuario.png)
-
-![Detalhes Anuncio](https://www.imagemhost.com.br/images/2022/12/16/Detalhes-Anuncio.png)
-
-![Atualizar Dados Cadastro](https://www.imagemhost.com.br/images/2022/12/16/Atualizar-Dados-Cadastro.png)
-
-
-
-
