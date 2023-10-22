@@ -11,7 +11,6 @@
 
 **Funcionalidades Implementadas:**
 - Cadastro de Novos Usuarios;
-- Login;
 - Alteração de Dados de Usuarios;
 - Criação de Anúncios;
 - Listagem de Anúncios;
